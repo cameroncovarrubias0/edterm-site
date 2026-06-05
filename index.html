@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdTerm — The Human Wisdom Database</title>
+<meta name="description" content="EdTerm is building the world's first Human Wisdom Database — preserving lived human experience as structured, searchable knowledge available to everyone, everywhere, forever.">
+<meta name="keywords" content="human wisdom, mentorship, knowledge preservation, EdTerm, experiential learning, AI mentor, Tero">
+<meta name="author" content="Cameron Covarrubias, EdTerm">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edterm.com/">
+<meta property="og:title" content="EdTerm — The Human Wisdom Database">
+<meta property="og:description" content="Every life contains wisdom no one has collected yet. EdTerm is building the infrastructure to change that.">
+<meta property="og:image" content="https://edterm.com/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="EdTerm — The Human Wisdom Database">
+<meta name="twitter:description" content="Every life contains wisdom no one has collected yet. EdTerm is building the infrastructure to change that.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #121331;
+    --deep-navy: #0d0d25;
+    --purple: #29056b;
+    --purple-light: #4a1d9e;
+    --purple-mid: #6b35c4;
+    --paper: #f8f7fc;
+    --aged: #ede9f7;
+    --slate: #4a5568;
+    --light: #8b8fa8;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--deep-navy); font-family: 'Libre Baskerville', Georgia, serif; overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 4rem;
+    background: rgba(248,247,252,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(41,5,107,0.1);
+  }
+  .nav-logo img { height: 56px; width: auto; }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; }
+  nav a:hover, nav a.active { color: var(--purple); }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 80px; }
+  .hero-left { padding: 8rem 4rem 6rem; display: flex; flex-direction: column; justify-content: center; }
+  .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple-mid); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 4.5vw, 5rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .hero-title em { font-style: italic; color: var(--purple); }
+  .hero-sub { font-size: 1.1rem; line-height: 1.85; color: var(--slate); max-width: 460px; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+
+  .btn-primary { background: var(--navy); color: var(--paper); padding: 0.9rem 2.2rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.2s; display: inline-block; border-radius: 3px; }
+  .btn-primary:hover { background: var(--purple); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--navy); padding: 0.9rem 2.2rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--navy); cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-block; border-radius: 3px; }
+  .btn-secondary:hover { background: var(--navy); color: var(--paper); }
+
+  .hero-right { background: linear-gradient(135deg, var(--navy) 0%, var(--purple) 100%); display: flex; align-items: center; justify-content: center; padding: 4rem; position: relative; overflow: hidden; }
+  .hero-right::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.06); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-right::after { content: ''; position: absolute; width: 350px; height: 350px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .hero-quote-block { position: relative; z-index: 2; opacity: 0; animation: fadeUp 0.8s ease forwards 1s; }
+  .pull-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 2vw, 2rem); font-style: italic; line-height: 1.6; color: rgba(255,255,255,0.92); border-left: 3px solid rgba(255,255,255,0.4); padding-left: 2rem; margin-bottom: 1.5rem; }
+  .pull-attr { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); text-transform: uppercase; padding-left: 2rem; }
+
+  .why-now { background: var(--deep-navy); color: var(--paper); padding: 7rem 4rem; }
+  .why-now-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-label::after { content: ''; display: inline-block; width: 2rem; height: 1px; }
+  .label-purple { color: var(--purple-mid); }
+  .label-purple::after { background: var(--purple-mid); }
+  .label-light { color: rgba(248,247,252,0.4); }
+  .label-light::after { background: rgba(248,247,252,0.4); }
+
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 3.2rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .section-title em { font-style: italic; color: var(--purple-mid); }
+  .title-light { color: var(--paper); }
+  .title-light em { color: rgba(180,150,255,0.9); }
+  .section-body { font-size: 1.05rem; line-height: 1.9; color: var(--slate); max-width: 600px; }
+  .body-light { color: rgba(248,247,252,0.6); }
+
+  .crisis-stats { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 1rem; }
+  .stat-item { border-left: 2px solid var(--purple-mid); padding-left: 1.5rem; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 3.2rem; font-weight: 900; color: var(--paper); line-height: 1; margin-bottom: 0.5rem; }
+  .stat-label { font-family: 'DM Mono', monospace; font-size: 0.75rem; letter-spacing: 0.04em; color: rgba(248,247,252,0.4); line-height: 1.6; }
+
+  section { padding: 7rem 4rem; max-width: 1400px; margin: 0 auto; }
+
+  .how-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 4rem; }
+  .how-card { padding: 2.5rem; background: white; border: 1px solid var(--aged); border-radius: 6px; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+  .how-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(41,5,107,0.1); }
+  .how-number { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--aged); line-height: 1; margin-bottom: 1.5rem; display: block; }
+  .how-card h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--deep-navy); }
+  .how-card p { font-size: 0.95rem; line-height: 1.8; color: var(--slate); }
+  .how-card-accent { position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: var(--purple); transition: width 0.4s ease; }
+  .how-card:hover .how-card-accent { width: 100%; }
+
+  .node-section { background: var(--aged); padding: 7rem 4rem; }
+  .node-inner { max-width: 1400px; margin: 0 auto; }
+  .node-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 4rem; }
+  .node-component { padding: 1.75rem; background: white; border: 1px solid rgba(41,5,107,0.1); border-radius: 6px; transition: box-shadow 0.2s; }
+  .node-component:hover { box-shadow: 0 8px 30px rgba(41,5,107,0.1); }
+  .node-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em; color: var(--purple); text-transform: uppercase; margin-bottom: 0.5rem; }
+  .node-component h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--deep-navy); }
+  .node-component p { font-size: 0.88rem; line-height: 1.7; color: var(--slate); }
+
+  .future-section { padding: 7rem 4rem; }
+  .future-inner { max-width: 1400px; margin: 0 auto; }
+  .future-timeline { position: relative; margin-top: 4rem; padding-left: 3rem; }
+  .future-timeline::before { content: ''; position: absolute; left: 0; top: 1rem; bottom: 1rem; width: 1px; background: linear-gradient(to bottom, var(--purple), var(--purple-mid), var(--navy)); }
+  .timeline-item { position: relative; margin-bottom: 3.5rem; padding-left: 2rem; }
+  .timeline-dot { position: absolute; left: -3.3rem; top: 0.3rem; width: 10px; height: 10px; border-radius: 50%; background: var(--purple); border: 2px solid var(--paper); outline: 1px solid var(--purple); }
+  .timeline-phase { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--purple-mid); margin-bottom: 0.5rem; }
+  .timeline-item h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--deep-navy); }
+  .timeline-item p { font-size: 1rem; line-height: 1.85; color: var(--slate); max-width: 580px; }
+
+  .humanitarian { background: var(--navy); color: var(--paper); padding: 7rem 4rem; }
+  .humanitarian-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr; gap: 5rem; align-items: center; }
+  .voices-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+  .voice-card { background: rgba(255,255,255,0.06); padding: 1.5rem; border-left: 2px solid rgba(180,150,255,0.4); border-radius: 0 4px 4px 0; }
+  .voice-text { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: 0.95rem; line-height: 1.7; color: rgba(248,247,252,0.85); margin-bottom: 0.75rem; }
+  .voice-name { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(248,247,252,0.35); }
+
+  .cta-section { padding: 8rem 4rem; text-align: center; }
+  .cta-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
+  .cta-section .section-label { justify-content: center; }
+  .cta-section .section-label::after { display: none; }
+  .cta-body { font-size: 1.1rem; line-height: 1.9; color: var(--slate); margin-bottom: 3rem; }
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .cta-note { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--light); }
+
+  footer { background: var(--deep-navy); color: rgba(248,247,252,0.35); padding: 2.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo img { height: 36px; width: auto; opacity: 0.85; }
+  .footer-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .hamburger { display: flex; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 7rem 1.5rem 4rem; }
+    section, .why-now, .node-section, .humanitarian, .future-section, .cta-section { padding: 4rem 1.5rem; }
+    .why-now-inner, .humanitarian-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .how-grid, .node-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+
+  /* HAMBURGER */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+  .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(248,247,252,0.98); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'DM Mono', monospace; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; }
+  .mobile-menu a:hover { color: var(--purple); }
+  .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; cursor: pointer; font-size: 1.5rem; color: var(--navy); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo"><img src="logo.webp" alt="EdTerm"></a>
+  <ul>
+    <li><a href="#why">Why Now</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#node">Wisdom Nodes</a></li>
+    <li><a href="#future">The Future</a></li>
+    <li><a href="about.html">The Founder</a></li>
+    <li><a href="contact.html">Connect</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="#why" onclick="document.getElementById('mobileMenu').classList.remove('open')">Why Now</a>
+  <a href="#how" onclick="document.getElementById('mobileMenu').classList.remove('open')">How It Works</a>
+  <a href="#node" onclick="document.getElementById('mobileMenu').classList.remove('open')">Wisdom Nodes</a>
+  <a href="#future" onclick="document.getElementById('mobileMenu').classList.remove('open')">The Future</a>
+  <a href="about.html">The Founder</a>
+  <a href="contact.html">Connect</a>
+</div>
+
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">EdTerm — Human Wisdom Database</p>
+    <h1 class="hero-title">Every life contains<br><em>wisdom</em><br>no one has<br>collected yet.</h1>
+    <p class="hero-sub">We are building the infrastructure to change that — preserving lived human experience as structured, searchable knowledge available to everyone, everywhere, forever.</p>
+    <div class="hero-cta">
+      <a href="#how" class="btn-primary">How It Works</a>
+      <a href="contact.html" class="btn-secondary">Join the Research</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-quote-block">
+      <p class="pull-quote">"We are losing the knowledge that matters most — not facts, but the wisdom of how to live, work, and navigate the world."</p>
+      <p class="pull-attr">— EdTerm Research Framework, 2025</p>
+    </div>
+  </div>
+</div>
+
+<div class="why-now" id="why">
+  <div class="why-now-inner">
+    <div>
+      <p class="section-label label-light reveal">The Crisis</p>
+      <h2 class="section-title title-light reveal">Why this matters.<br><em>Why right now.</em></h2>
+      <p class="section-body body-light reveal" style="margin-bottom:1.5rem;">Every day, experienced professionals retire without documentation of what they truly knew. Industries transform faster than knowledge can transfer. Mentorship — the primary vehicle for passing wisdom — remains radically unequal, available only to those lucky enough to be near the right people.</p>
+      <p class="section-body body-light reveal">Meanwhile, journalism — the discipline best equipped to elicit and preserve human experience — is collapsing as an industry. Its practitioners are becoming homeless just as their skills are needed most. These two crises share one solution. EdTerm is building it.</p>
+    </div>
+    <div class="crisis-stats reveal">
+      <div class="stat-item">
+        <div class="stat-number">10,000</div>
+        <div class="stat-label">Baby Boomers retire every day in the US alone — taking decades of undocumented expertise with them</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">26%</div>
+        <div class="stat-label">of US newsroom jobs have disappeared since 2008 — the discipline of human story collection is losing its home</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">1 in 3</div>
+        <div class="stat-label">people have never had access to a meaningful mentor — the guidance gap falls hardest on those who need it most</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="how">
+  <p class="section-label label-purple reveal">The Method</p>
+  <h2 class="section-title reveal">How <em>wisdom becomes data</em><br>— and data becomes guidance.</h2>
+  <p class="section-body reveal">EdTerm is not an AI that invents advice. It is a system built on real human experience, collected with discipline, preserved with care, and made accessible to anyone who needs it.</p>
+  <div class="how-grid">
+    <div class="how-card reveal">
+      <span class="how-number">01</span>
+      <h3>Train the Collectors</h3>
+      <p>University journalism programs are restructured around Wisdom Journalism — training students to elicit, structure, and preserve lived human experience as Wisdom Nodes.</p>
+      <div class="how-card-accent"></div>
+    </div>
+    <div class="how-card reveal">
+      <span class="how-number">02</span>
+      <h3>Build the Archive</h3>
+      <p>Wisdom Nodes are collected from people across industries, geographies, and life stages — with rigorous ethical consent and institutional stewardship through universities.</p>
+      <div class="how-card-accent"></div>
+    </div>
+    <div class="how-card reveal">
+      <span class="how-number">03</span>
+      <h3>Make It Findable</h3>
+      <p>The Human Wisdom Database finds patterns across thousands of real experiences and surfaces what people in structurally similar situations actually did — and what happened next.</p>
+      <div class="how-card-accent"></div>
+    </div>
+  </div>
+</section>
+
+<div class="node-section" id="node">
+  <div class="node-inner">
+    <p class="section-label label-purple reveal">The Unit</p>
+    <h2 class="section-title reveal">What is a <em>Wisdom Node?</em></h2>
+    <p class="section-body reveal">A Wisdom Node is the fundamental unit of the Human Wisdom Database — a structured narrative artifact that captures lived experience in a form that is both deeply human and computationally retrievable.</p>
+    <div class="node-grid">
+      <div class="node-component reveal">
+        <div class="node-num">Layer 01</div>
+        <h4>Contextual Frame</h4>
+        <p>Who this person was, what world they were operating in, what the stakes were. The metadata that allows future users to find relevant nodes.</p>
+      </div>
+      <div class="node-component reveal">
+        <div class="node-num">Layer 02</div>
+        <h4>The Threshold Moment</h4>
+        <p>The specific decision, crisis, or turning point at the heart of the story — when something was truly at stake.</p>
+      </div>
+      <div class="node-component reveal">
+        <div class="node-num">Layer 03</div>
+        <h4>The Hidden Interior</h4>
+        <p>What they were actually experiencing psychologically. The fears beneath the surface. The most valuable — and most undocumented — layer.</p>
+      </div>
+      <div class="node-component reveal">
+        <div class="node-num">Layer 04</div>
+        <h4>The Navigation</h4>
+        <p>How they moved through it — specific actions taken, mistakes made, reversals navigated, resources drawn upon.</p>
+      </div>
+      <div class="node-component reveal">
+        <div class="node-num">Layer 05</div>
+        <h4>The Residue</h4>
+        <p>What the experience left behind. What changed in how they see themselves and the world. The transformation that makes it wisdom.</p>
+      </div>
+      <div class="node-component reveal">
+        <div class="node-num">Layer 06</div>
+        <h4>Transferable Insight</h4>
+        <p>What someone navigating a similar situation could actually use — developed collaboratively, never forced or prescribed.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="future-section" id="future">
+  <div class="future-inner">
+    <p class="section-label label-purple reveal">The Vision</p>
+    <h2 class="section-title reveal">What this means<br><em>for the future.</em></h2>
+    <p class="section-body reveal">EdTerm is not a product launch. It is the beginning of a new kind of knowledge infrastructure — one that treats lived human experience as the resource it actually is.</p>
+    <div class="future-timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-phase">Phase One — Foundation</div>
+        <h3>Wisdom Journalism Pilot Programs</h3>
+        <p>Partner with 2–3 university journalism programs to develop and validate the Wisdom Journalism curriculum. Train the first cohort of Wisdom Node collectors. Build the ethical and consent frameworks that will govern the database.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="background:var(--purple-mid);outline-color:var(--purple-mid);"></div>
+        <div class="timeline-phase" style="color:var(--purple-mid);">Phase Two — Collection</div>
+        <h3>The Human Wisdom Database Grows</h3>
+        <p>Universities become active stewards — collecting from faculty, alumni, and communities. Professional schools replace static case studies with living nodes from practitioners. The database achieves the scale needed for meaningful pattern recognition.</p>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="background:var(--navy);outline-color:var(--navy);"></div>
+        <div class="timeline-phase" style="color:var(--light);">Phase Three — Access</div>
+        <h3>Mentorship Without Borders</h3>
+        <p>Anyone navigating a consequential decision has access to the distilled experience of thousands of people who have navigated what they are navigating. The guidance gap closes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="humanitarian">
+  <div class="humanitarian-inner">
+    <div>
+      <p class="section-label label-light reveal">The Mission</p>
+      <h2 class="section-title title-light reveal">Whose wisdom gets <em>preserved.</em><br>Who gets <em>access.</em></h2>
+      <p class="section-body body-light reveal" style="margin-bottom:1.5rem;">The wisdom that disappears fastest belongs to people whose lives contain the most hard-won lessons — those who have navigated poverty, illness, discrimination, migration, and exclusion without documentation or recognition.</p>
+      <p class="section-body body-light reveal">EdTerm is an act of epistemic justice. Your experience counts as knowledge. It deserves to outlast you and reach people you will never meet who are navigating what you have navigated.</p>
+    </div>
+    <div class="voices-stack reveal">
+      <div class="voice-card">
+        <p class="voice-text">"The guidance I needed existed. It just lived in people I never had access to."</p>
+        <p class="voice-name">First-generation graduate, Tampa FL</p>
+      </div>
+      <div class="voice-card">
+        <p class="voice-text">"Forty years of knowing how to do this job — and there's no place to put it."</p>
+        <p class="voice-name">Retiring public school teacher</p>
+      </div>
+      <div class="voice-card">
+        <p class="voice-text">"The case studies in school were from the 90s. None of them looked like my situation."</p>
+        <p class="voice-name">First-time entrepreneur, Lagos</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section" id="connect">
+  <div class="cta-inner">
+    <p class="section-label label-purple reveal">Get Involved</p>
+    <h2 class="section-title reveal" style="font-size:clamp(2rem,4vw,3.8rem);">This project needs<br><em>builders.</em></h2>
+    <p class="cta-body reveal">EdTerm is at the research stage. We are looking for university partners, journalism educators, data scientists, narrative psychologists, and anyone who believes that lived human experience deserves to be treated as the knowledge it is.</p>
+    <div class="cta-buttons reveal">
+      <a href="contact.html" class="btn-primary">Contact the Team</a>
+      <a href="#" class="btn-secondary">Read the Paper</a>
+    </div>
+    <p class="cta-note reveal">Independent researchers, academics, and potential collaborators welcome.</p>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html"><img src="logo.webp" alt="EdTerm"></a>
+  <div class="footer-note">Human Wisdom Database — Research Stage 2025</div>
+  <div class="footer-note">edterm.com</div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
