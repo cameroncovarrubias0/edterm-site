@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect — Research & Partnership | EdTerm</title>
+<meta name="description" content="EdTerm is actively seeking university partners, researchers, journalists, and organizations who believe lived human experience is the most undervalued knowledge resource on earth.">
+<meta name="author" content="Cameron Covarrubias, EdTerm">
+
+<!-- Open Graph / Social Sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edterm.com/contact.html">
+<meta property="og:title" content="Connect — Research & Partnership | EdTerm">
+<meta property="og:description" content="EdTerm is looking for the right partners. Universities, researchers, journalists, and organizations welcome.">
+<meta property="og:image" content="https://edterm.com/og-image.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connect — Research & Partnership | EdTerm">
+<meta name="twitter:description" content="EdTerm is looking for the right partners. Universities, researchers, journalists, and organizations welcome.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #121331;
+    --deep-navy: #0d0d25;
+    --purple: #29056b;
+    --purple-light: #4a1d9e;
+    --purple-mid: #6b35c4;
+    --paper: #f8f7fc;
+    --aged: #ede9f7;
+    --slate: #4a5568;
+    --light: #8b8fa8;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--paper); color: var(--deep-navy); font-family: 'Libre Baskerville', Georgia, serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 4rem; background: rgba(248,247,252,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(41,5,107,0.1); }
+  .nav-logo img { height: 56px; width: auto; }
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
+  nav a { font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--light); text-decoration: none; transition: color 0.2s; }
+  nav a:hover, nav a.active { color: var(--purple); }
+
+  /* HERO */
+  .contact-hero {
+    background: linear-gradient(135deg, var(--deep-navy) 0%, var(--purple) 100%);
+    padding: 10rem 4rem 7rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-hero::before {
+    content: '';
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+    top: 50%; left: 70%;
+    transform: translate(-50%, -50%);
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 2; }
+  .hero-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 4rem); font-weight: 700; font-style: italic; line-height: 1.2; color: white; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+  .hero-sub { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; line-height: 1.85; color: rgba(255,255,255,0.6); max-width: 660px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+
+  /* MAIN CONTENT */
+  .contact-body { max-width: 1200px; margin: 0 auto; padding: 6rem 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+
+  .section-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple-mid); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-label::after { content: ''; display: inline-block; width: 2rem; height: 1px; background: var(--purple-mid); }
+
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 2.5vw, 2.5rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .section-title em { font-style: italic; color: var(--purple); }
+
+  /* WHO WE'RE LOOKING FOR */
+  .partner-types { display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem; }
+  .partner-card { border-left: 2px solid var(--aged); padding-left: 1.5rem; transition: border-color 0.2s; }
+  .partner-card:hover { border-color: var(--purple-mid); }
+  .partner-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--deep-navy); margin-bottom: 0.5rem; }
+  .partner-card p { font-size: 0.95rem; line-height: 1.75; color: var(--slate); }
+
+  /* FORM */
+  .contact-form-wrap { position: sticky; top: 7rem; }
+  .form-card { background: white; border: 1px solid rgba(41,5,107,0.08); border-radius: 6px; padding: 2.5rem; box-shadow: 0 4px 24px rgba(18,19,49,0.06); }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--deep-navy); }
+  .form-sub { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; color: var(--light); text-transform: uppercase; margin-bottom: 2rem; }
+
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { display: block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.5rem; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid rgba(41,5,107,0.12);
+    border-radius: 3px;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 0.9rem;
+    color: var(--deep-navy);
+    background: var(--paper);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--purple-mid); background: white; }
+  .form-group textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+  .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b8fa8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--navy);
+    color: var(--paper);
+    padding: 1rem 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+  .btn-submit:hover { background: var(--purple); transform: translateY(-2px); }
+
+  .form-note { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.04em; color: var(--light); text-align: center; margin-top: 1rem; line-height: 1.6; }
+
+  /* QUOTE BREAK */
+  .quote-break {
+    background: var(--deep-navy);
+    padding: 5rem 4rem;
+  }
+  .quote-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+  .big-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-style: italic; color: rgba(255,255,255,0.88); line-height: 1.6; margin-bottom: 1.5rem; }
+  .big-quote em { color: rgba(180,150,255,0.9); font-style: normal; }
+  .quote-attr { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+
+  /* FOOTER */
+  footer { background: var(--deep-navy); color: rgba(248,247,252,0.35); padding: 2.5rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav ul { display: none; }
+    .contact-hero, .contact-body { padding: 5rem 1.5rem 3rem; }
+    .contact-body { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-form-wrap { position: static; }
+    .quote-break { padding: 4rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.webp" alt="EdTerm"></a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html#why">Why Now</a></li>
+    <li><a href="index.html#how">How It Works</a></li>
+    <li><a href="about.html">The Founder</a></li>
+    <li><a href="contact.html" class="active">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="contact-hero">
+  <div class="hero-inner">
+    <p class="hero-label">Research Partnership</p>
+    <h1 class="hero-title">EdTerm is looking for<br>the right partners.</h1>
+    <p class="hero-sub">We are at the research stage — actively seeking university partners, academics, journalists, and organizations who believe that lived human experience is the most undervalued knowledge resource on earth. If that belief resonates, we want to hear from you.</p>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="contact-body">
+
+  <!-- LEFT: WHO WE'RE LOOKING FOR -->
+  <div>
+    <p class="section-label reveal">Who We're Looking For</p>
+    <h2 class="section-title reveal">The people who<br><em>build this with us.</em></h2>
+
+    <div class="partner-types">
+
+      <div class="partner-card reveal">
+        <h3>University Research Partners</h3>
+        <p>Academic institutions interested in co-developing the Wisdom Journalism curriculum, conducting research on knowledge preservation and transfer, or stewarding regional Wisdom Databases as part of their community mission.</p>
+      </div>
+
+      <div class="partner-card reveal">
+        <h3>Journalism Educators & Programs</h3>
+        <p>Faculty and programs open to restructuring elements of their curriculum around Wisdom Journalism — training students to elicit, structure, and preserve lived human experience as a new form of public knowledge.</p>
+      </div>
+
+      <div class="partner-card reveal">
+        <h3>Researchers & Academics</h3>
+        <p>Scholars working in narrative psychology, knowledge management, oral history, AI ethics, education, or human development with interest in the theoretical and empirical foundations of the Human Wisdom Database.</p>
+      </div>
+
+      <div class="partner-card reveal">
+        <h3>Organizational Partners</h3>
+        <p>Companies, nonprofits, or government bodies looking to preserve institutional knowledge, support workforce mentorship at scale, or pilot EdTerm as a tool for identity development and experiential learning.</p>
+      </div>
+
+      <div class="partner-card reveal">
+        <h3>Mentors & Wisdom Contributors</h3>
+        <p>Experienced professionals from any field or background willing to contribute their lived experience to the Human Wisdom Database — helping future learners navigate decisions you've already faced.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="contact-form-wrap">
+    <div class="form-card reveal">
+      <p class="form-title">Start a conversation.</p>
+      <p class="form-sub">Research &amp; Partnership Inquiries</p>
+
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Full name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="your@institution.edu">
+      </div>
+
+      <div class="form-group">
+        <label for="org">Organization / Institution</label>
+        <input type="text" id="org" name="org" placeholder="University, company, or independent">
+      </div>
+
+      <div class="form-group">
+        <label for="type">I am reaching out as a...</label>
+        <select id="type" name="type">
+          <option value="" disabled selected>Select your role</option>
+          <option value="university">University / Research Institution</option>
+          <option value="journalism">Journalism Educator / Program</option>
+          <option value="researcher">Researcher / Academic</option>
+          <option value="org">Organizational Partner</option>
+          <option value="mentor">Potential Mentor / Contributor</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Tell us about your interest</label>
+        <textarea id="message" name="message" placeholder="What drew you to EdTerm? What are you working on? What kind of collaboration are you imagining?"></textarea>
+      </div>
+
+      <a href="#" class="btn-submit" id="send-btn">Send Message</a>
+      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(41,5,107,0.08); display:flex; flex-direction:column; gap:0.5rem;">
+        <a href="mailto:research@edterm.com" style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.06em; color:var(--purple-mid); text-decoration:none;">research@edterm.com</a>
+        <a href="mailto:partners@edterm.com" style="font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.06em; color:var(--purple-mid); text-decoration:none;">partners@edterm.com</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- QUOTE BREAK -->
+<div class="quote-break">
+  <div class="quote-inner">
+    <p class="big-quote reveal">"The most valuable knowledge in the world is sitting in <em>people</em> — not databases, not textbooks, not institutions. We're building the infrastructure to change that."</p>
+    <p class="quote-attr reveal">— Cameron Covarrubias, Founder, EdTerm</p>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html"><img src="logo.webp" alt="EdTerm" style="height:36px;opacity:0.85;"></a>
+  <div class="footer-note">Human Wisdom Database — Research Stage 2025</div>
+  <div class="footer-note">edterm.com</div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submit — opens email client with pre-filled message
+  document.getElementById('send-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const org     = document.getElementById('org').value.trim();
+    const type    = document.getElementById('type').value;
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      alert('Please fill in your name, email, and message before sending.');
+      return;
+    }
+
+    const subject = encodeURIComponent('EdTerm Research Partnership Inquiry — ' + name);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n' +
+      'Organization: ' + (org || 'Not specified') + '\n' +
+      'Role: ' + (type || 'Not specified') + '\n\n' +
+      'Message:\n' + message
+    );
+
+    window.location.href = 'mailto:research@edterm.com?subject=' + subject + '&body=' + body;
+  });
+</script>
+</body>
+</html>
