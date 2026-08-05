@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdTerm for Universities — Wisdom Journalism Curriculum</title>
+<meta name="description" content="Wisdom Journalism gives journalism programs a new professional purpose at the moment traditional paths are contracting. A peer-reviewed curriculum framework for the next era of the field.">
+<meta property="og:title" content="EdTerm for Universities — Wisdom Journalism Curriculum">
+<meta property="og:image" content="https://edterm.com/og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#121331;
+  --deep:#0d0d25;
+  --purple:#29056b;
+  --purple-m:#4a1d9e;
+  --purple-l:#7c3aed;
+  --gold:#c9a84c;
+  --gold-l:#e8c97a;
+  --paper:#f8f7fc;
+  --slate:#4a5568;
+  --muted:#8b8fa8;
+  --divider:rgba(41,5,107,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--navy);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 4rem;background:rgba(248,247,252,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--divider)}
+.nav-logo img{height:52px;width:auto}
+nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+nav a{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+nav a:hover,nav a.active{color:var(--purple)}
+nav a.lis-link{color:var(--purple-l);font-weight:500}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(248,247,252,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex!important}
+.mobile-menu a{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--navy)}
+
+/* HERO — SPLIT */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:72px}
+.hero-left{background:var(--paper);padding:6rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.hero-right{background:linear-gradient(150deg,var(--navy) 0%,#1a0545 50%,var(--purple) 100%);padding:6rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.1s}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4vw,4.2rem);font-weight:900;line-height:1.08;color:var(--navy);margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.3s}
+.hero-title em{font-style:italic;color:var(--purple)}
+.hero-sub{font-size:1.05rem;line-height:1.85;color:var(--slate);max-width:480px;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-quote{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,2.2vw,1.8rem);font-style:italic;line-height:1.6;color:rgba(255,255,255,0.88);padding-left:1.75rem;border-left:2px solid rgba(201,168,76,0.6);margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-quote-attr{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);opacity:0;animation:fadeUp 0.7s ease forwards 0.7s}
+.hero-creds{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:3rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.9s}
+.cred-badge{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:0.3rem 0.75rem;border-radius:2px}
+
+/* TWO CRISES */
+.crises{padding:8rem 4rem;max-width:1100px;margin:0 auto}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.25rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem}
+.section-title em{font-style:italic;color:var(--purple)}
+.crises-grid{display:grid;grid-template-columns:1fr 80px 1fr;gap:0;margin-top:3.5rem;align-items:stretch}
+.crisis-card{padding:2.5rem;border-radius:6px}
+.crisis-card.left{background:var(--paper);border:1.5px solid var(--divider)}
+.crisis-card.right{background:var(--paper);border:1.5px solid var(--divider)}
+.crisis-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.crisis-card h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.crisis-card p{font-size:0.95rem;line-height:1.8;color:var(--slate)}
+.crisis-bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1rem}
+.bridge-line{width:1px;flex:1;background:var(--divider)}
+.bridge-center{background:var(--purple);color:white;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.75rem;font-style:italic;text-align:center;flex-shrink:0;line-height:1.2;padding:0.25rem}
+.bridge-label{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);text-align:center;writing-mode:vertical-rl}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--divider),transparent);margin:0 4rem}
+
+/* WHAT IT IS */
+.what{padding:8rem 4rem;background:var(--deep)}
+.what-inner{max-width:1100px;margin:0 auto}
+.what-inner .section-eyebrow{color:rgba(201,168,76,0.7)}
+.what-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;color:white;line-height:1.15;margin-bottom:1rem}
+.what-title em{font-style:italic;color:var(--gold-l)}
+.what-sub{font-size:1rem;line-height:1.85;color:rgba(255,255,255,0.5);max-width:680px;margin-bottom:4rem}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.what-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:6px;padding:2rem}
+.what-card-num{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:rgba(201,168,76,0.5);margin-bottom:0.75rem}
+.what-card h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:white;margin-bottom:0.75rem;line-height:1.3}
+.what-card p{font-size:0.9rem;line-height:1.78;color:rgba(255,255,255,0.55)}
+
+/* GLOBAL */
+.global{padding:8rem 4rem;max-width:1100px;margin:0 auto}
+.global-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-top:3rem}
+.global-left p{font-size:1rem;line-height:1.9;color:var(--slate);margin-bottom:1.25rem}
+.pull-quote{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;line-height:1.6;color:var(--purple);border-left:2px solid var(--gold);padding-left:1.5rem;margin:2rem 0}
+.global-right{display:flex;flex-direction:column;gap:1.5rem}
+.global-card{border-left:2px solid var(--gold);padding:1.25rem 1.5rem;transition:border-color 0.2s}
+.global-card:hover{border-color:var(--purple)}
+.global-card h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem}
+.global-card p{font-size:0.9rem;line-height:1.7;color:var(--slate)}
+
+/* WHAT PARTNER RECEIVES */
+.receives{background:var(--navy);padding:8rem 4rem}
+.receives-inner{max-width:1100px;margin:0 auto}
+.receives-inner .section-eyebrow{color:rgba(201,168,76,0.7)}
+.receives-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;color:white;line-height:1.15;margin-bottom:4rem}
+.receives-title em{font-style:italic;color:var(--gold-l)}
+.receives-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.receive-card{border-top:2px solid var(--gold);padding-top:1.75rem}
+.receive-num{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;color:var(--gold);margin-bottom:1rem}
+.receive-card h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:white;margin-bottom:0.75rem;line-height:1.3}
+.receive-card p{font-size:0.9rem;line-height:1.78;color:rgba(255,255,255,0.55)}
+
+/* CTA */
+.cta{padding:8rem 4rem;text-align:center}
+.cta-inner{max-width:720px;margin:0 auto}
+.cta-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.5rem}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;line-height:1.15;margin-bottom:1.25rem}
+.cta-title em{font-style:italic;color:var(--purple)}
+.cta-body{font-size:1rem;line-height:1.9;color:var(--slate);margin-bottom:3rem}
+.btn-primary{display:inline-block;background:var(--purple);color:white;padding:0.9rem 2.5rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:3px;transition:background 0.2s,transform 0.2s;margin-bottom:1.5rem}
+.btn-primary:hover{background:var(--purple-m);transform:translateY(-2px)}
+.cta-note{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.06em;color:var(--muted)}
+.cta-note a{color:var(--purple-l);text-decoration:none}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid rgba(255,255,255,0.04);color:rgba(248,247,252,0.3);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.footer-note{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:5rem 1.5rem 3rem}
+  .hero-right{padding:3rem 1.5rem 4rem}
+  .crises{padding:5rem 1.5rem}
+  .crises-grid{grid-template-columns:1fr;gap:1.5rem}
+  .crisis-bridge{display:none}
+  .what,.global,.receives,.cta{padding:5rem 1.5rem}
+  .what-grid{grid-template-columns:1fr}
+  .global-grid{grid-template-columns:1fr;gap:3rem}
+  .receives-grid{grid-template-columns:1fr}
+  .divider{margin:0 1.5rem}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.webp" alt="EdTerm"></a>
+  <ul>
+    <li><a href="healthcare.html">For Healthcare</a></li>
+    <li><a href="universities.html" class="active">For Universities</a></li>
+    <li><a href="lis.html" class="lis-link">Learning Identity</a></li>
+    <li><a href="about.html">The Founder</a></li>
+    <li><a href="contact.html">Connect</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="healthcare.html">For Healthcare</a>
+  <a href="universities.html">For Universities</a>
+  <a href="lis.html">Learning Identity</a>
+  <a href="about.html">The Founder</a>
+  <a href="contact.html">Connect</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">EdTerm for Universities</p>
+    <h1 class="hero-title">Two crises.<br>One <em>solution.</em></h1>
+    <p class="hero-sub">Journalism is losing its institutional home at the same moment that human wisdom is disappearing undocumented. Wisdom Journalism is the bridge between them.</p>
+  </div>
+  <div class="hero-right">
+    <p class="hero-quote">"The skills journalism programs have always taught are precisely the skills required to collect human experience at scale. This is not a retreat from relevance — it is a redefinition of it."</p>
+    <p class="hero-quote-attr">— EdTerm Research Framework, 2025</p>
+    <div class="hero-creds">
+      <span class="cred-badge">Double-Blind Peer Review Passed</span>
+      <span class="cred-badge">ACE2026 · Tokyo · November 2026</span>
+      <span class="cred-badge">Pilot Study In Development</span>
+    </div>
+  </div>
+</div>
+
+<!-- TWO CRISES -->
+<div class="crises">
+  <p class="section-eyebrow reveal">The Argument</p>
+  <h2 class="section-title reveal">Two simultaneous crises —<br><em>one structural solution.</em></h2>
+  <div class="crises-grid">
+    <div class="crisis-card left reveal">
+      <p class="crisis-label">Crisis One</p>
+      <h3>Journalism is losing its professional infrastructure.</h3>
+      <p>Newsrooms have shed over a third of their workforce since 2008. Journalism schools are training students for roles that no longer exist at scale. The field needs a new professional purpose — and a new argument for why the skills it teaches matter.</p>
+    </div>
+    <div class="crisis-bridge">
+      <div class="bridge-line"></div>
+      <div class="bridge-center">Wisdom Journalism</div>
+      <div class="bridge-line"></div>
+    </div>
+    <div class="crisis-card right reveal">
+      <p class="crisis-label">Crisis Two</p>
+      <h3>Human wisdom is disappearing undocumented.</h3>
+      <p>Every day, experienced professionals retire without documentation of what they actually knew — how they actually decided, what took decades to develop and cannot be replaced by a manual, a training module, or an AI model trained on generic text.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHAT WISDOM JOURNALISM IS -->
+<div class="what">
+  <div class="what-inner">
+    <p class="section-eyebrow reveal">What Wisdom Journalism Is</p>
+    <h2 class="what-title reveal">A new professional purpose<br>for skills that <em>already exist.</em></h2>
+    <p class="what-sub reveal">Students are trained not to produce news content but to collect, structure, and preserve threshold professional experiences as Wisdom Nodes — discrete, transferable knowledge units designed to enter the Human Wisdom Database and become accessible to anyone who needs them. The curriculum framework is peer-reviewed. The pilot that validates it in practice is what we are building next.</p>
+    <div class="what-grid">
+      <div class="what-card reveal">
+        <p class="what-card-num">What students do</p>
+        <h3>Collect human experience at scale</h3>
+        <p>Trained in structured interviewing, narrative construction, and elicitation methodology — the skills journalism has always taught, applied to a new purpose. Each student produces real Wisdom Nodes that enter the Human Wisdom Database.</p>
+      </div>
+      <div class="what-card reveal">
+        <p class="what-card-num">What the work produces</p>
+        <h3>Permanent, searchable knowledge</h3>
+        <p>Wisdom Nodes — six-component structured artifacts that capture how experienced professionals actually think and decide under pressure. Not summaries. Not testimonials. Structured knowledge that transfers what was previously untransferable.</p>
+      </div>
+      <div class="what-card reveal">
+        <p class="what-card-num">Why it matters in the AI era</p>
+        <h3>The work that cannot be automated</h3>
+        <p>In a world transformed by AI, collecting lived human experience requires precisely the human skills AI cannot replicate — presence, trust, the ability to elicit what someone experienced rather than what they prepared to say.</p>
+      </div>
+      <div class="what-card reveal">
+        <p class="what-card-num">The curriculum framework</p>
+        <h3>Peer-reviewed methodology, pilot in development</h3>
+        <p>The Wisdom Journalism methodology passed double-blind peer review — the framework has academic standing. The next step is real-world validation through a structured pilot. That is what we are building now, and it is what partner universities help create.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GLOBAL MISSION -->
+<div class="global">
+  <p class="section-eyebrow reveal">The Global Mission</p>
+  <h2 class="section-title reveal">Wisdom is culturally constructed.<br><em>The database must reflect that.</em></h2>
+  <div class="global-grid">
+    <div class="global-left reveal">
+      <p>What counts as a threshold moment in one culture is shaped by history, economic context, and social structure in ways completely different from another. A database that collects only one culture's wisdom will fail the people who most need it.</p>
+      <p>EdTerm is building a global network of university research partners — not implementation partners but cultural co-architects. Each regional partner helps define what wisdom transfer looks like in their specific context. Each partner contributes nodes that no other institution could produce.</p>
+      <div class="pull-quote">"Together they build a database that represents humanity rather than a subset of it."</div>
+      <p>We are actively seeking first partners across every continent. The methodology for collecting wisdom from a specific region can only be developed by someone who knows that region from the inside.</p>
+    </div>
+    <div class="global-right">
+      <div class="global-card reveal">
+        <h3>Cultural co-architects</h3>
+        <p>Partner universities don't implement a finished product. They help shape what the methodology becomes in their specific cultural and academic context.</p>
+      </div>
+      <div class="global-card reveal">
+        <h3>Original research contribution</h3>
+        <p>Every regional partner produces Wisdom Nodes that could not exist without their specific cultural knowledge. This is not replication — it is original contribution to a global archive.</p>
+      </div>
+      <div class="global-card reveal">
+        <h3>International academic recognition</h3>
+        <p>Co-authorship on peer-reviewed publications. Participation in international conference presentations. Named membership in a global research network building something that has never been built before.</p>
+      </div>
+      <div class="global-card reveal">
+        <h3>A database built to last</h3>
+        <p>The Human Wisdom Database is designed to outlast any individual institution. Partner universities are not customers — they are founding contributors to a permanent global archive of lived human experience.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT PARTNER RECEIVES -->
+<div class="receives">
+  <div class="receives-inner">
+    <p class="section-eyebrow reveal">What Partnership Means</p>
+    <h2 class="receives-title reveal">Three things a partner<br>university <em>receives.</em></h2>
+    <div class="receives-grid">
+      <div class="receive-card reveal">
+        <p class="receive-num">One</p>
+        <h3>The Wisdom Journalism Curriculum Framework</h3>
+        <p>Fully documented and peer-reviewed — adapted to the institution's cultural and academic context with EdTerm's direct involvement. Not a generic syllabus. A framework built around what wisdom transfer looks like in your specific region.</p>
+      </div>
+      <div class="receive-card reveal">
+        <p class="receive-num">Two</p>
+        <h3>Co-Authorship on Research Publications</h3>
+        <p>Full academic credit on peer-reviewed research emerging from the pilot. Participation in international conference presentations including ACE2026 in Tokyo and beyond. The methodology has passed peer review — the pilot is where it gets tested, refined, and validated in practice.</p>
+      </div>
+      <div class="receive-card reveal">
+        <p class="receive-num">Three</p>
+        <h3>Named Participation in the Global Network</h3>
+        <p>The first structured archive of lived human experience built across cultures, careers, and generations. Your institution's contribution becomes a permanent part of something designed to outlast any one university, any one region, any one generation.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-inner">
+    <p class="cta-eyebrow reveal">The Invitation</p>
+    <h2 class="cta-title reveal">We are looking for academic collaborators<br>who want to help <em>shape what this becomes.</em></h2>
+    <p class="cta-body reveal">EdTerm is not looking for institutions that want to implement a finished product. We are looking for academic collaborators who see the crisis in journalism education and the opportunity in what comes next — who understand that the methodology for collecting wisdom from their region can only be developed by someone who knows that region from the inside.</p>
+    <a href="contact.html" class="btn-primary reveal">Begin a Partnership Inquiry</a><br>
+    <p class="cta-note reveal">Or write directly to <a href="mailto:partners@edterm.com">partners@edterm.com</a></p>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html"><img src="logo.webp" alt="EdTerm" style="height:40px;opacity:0.6;"></a>
+  <div class="footer-note">EdTerm for Universities &nbsp;·&nbsp; partners@edterm.com</div>
+  <div class="footer-note">edterm.com</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); obs.unobserve(e.target); }
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
