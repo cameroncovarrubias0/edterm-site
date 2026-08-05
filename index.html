@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdTerm — The Human Wisdom Database</title>
+<meta name="description" content="EdTerm is building the world's first Human Wisdom Database — preserving lived human experience as structured, searchable knowledge available to everyone, everywhere, forever.">
+<meta property="og:title" content="EdTerm — The Human Wisdom Database">
+<meta property="og:description" content="Every life contains wisdom no one has collected yet. EdTerm is building the infrastructure to change that.">
+<meta property="og:image" content="https://edterm.com/og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#121331;
+  --deep:#0d0d25;
+  --purple:#29056b;
+  --purple-m:#4a1d9e;
+  --purple-l:#7c3aed;
+  --gold:#c9a84c;
+  --gold-l:#e8c97a;
+  --paper:#f8f7fc;
+  --slate:#4a5568;
+  --muted:#8b8fa8;
+  --divider:rgba(41,5,107,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--navy);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 4rem;background:rgba(248,247,252,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--divider)}
+.nav-logo img{height:52px;width:auto}
+nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+nav a{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+nav a:hover{color:var(--purple)}
+nav a.lis-link{color:var(--purple-l);font-weight:500}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(248,247,252,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex!important}
+.mobile-menu a{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--navy)}
+
+/* HERO — SPLIT */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:72px}
+.hero-left{background:var(--paper);padding:6rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.hero-right{background:linear-gradient(150deg,var(--navy) 0%,#1a0545 50%,var(--purple) 100%);padding:6rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.1s}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,4.5vw,5rem);font-weight:900;line-height:1.05;color:var(--navy);margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.3s}
+.hero-title em{font-style:italic;color:var(--purple)}
+.hero-sub{font-size:1.05rem;line-height:1.85;color:var(--slate);max-width:480px;margin-bottom:3rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-paths{display:grid;grid-template-columns:1fr 1fr;gap:1rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.7s}
+.path-card{background:white;border:1.5px solid var(--divider);border-radius:6px;padding:1.5rem;text-decoration:none;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;display:block}
+.path-card:hover{border-color:var(--purple);transform:translateY(-2px);box-shadow:0 8px 24px rgba(41,5,107,0.1)}
+.path-card.gold-card{border-color:rgba(201,168,76,0.4)}
+.path-card.gold-card:hover{border-color:var(--gold);box-shadow:0 8px 24px rgba(201,168,76,0.15)}
+.path-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.6rem}
+.path-card.gold-card .path-label{color:var(--gold)}
+.path-card:not(.gold-card) .path-label{color:var(--purple-l)}
+.path-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;line-height:1.3}
+.path-desc{font-size:0.82rem;line-height:1.6;color:var(--slate)}
+.path-arrow{display:inline-block;margin-top:0.75rem;font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--muted)}
+.hero-quote{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,2.5vw,2rem);font-style:italic;line-height:1.55;color:rgba(255,255,255,0.88);padding-left:1.75rem;border-left:2px solid rgba(201,168,76,0.6);margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-quote-attr{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);opacity:0;animation:fadeUp 0.7s ease forwards 0.7s}
+.hero-creds{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:3rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.9s}
+.cred-badge{font-family:'DM Mono',monospace;font-size:0.55rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);border:1px solid rgba(255,255,255,0.1);padding:0.3rem 0.75rem;border-radius:2px}
+
+/* MISSION SECTION */
+.mission{padding:8rem 4rem;max-width:1100px;margin:0 auto}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.25rem}
+.mission-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;margin-top:3rem}
+.mission-left h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,3rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem}
+.mission-left h2 em{font-style:italic;color:var(--purple)}
+.mission-left p{font-size:1rem;line-height:1.9;color:var(--slate);margin-bottom:1.25rem}
+.mission-right{display:flex;flex-direction:column;gap:2rem;padding-top:0.5rem}
+.signal-card{border-left:2px solid var(--gold);padding:1.25rem 1.5rem}
+.signal-card h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem}
+.signal-card p{font-size:0.9rem;line-height:1.7;color:var(--slate)}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--divider),transparent);margin:0 4rem}
+
+/* WHAT WE DO */
+.what{background:var(--deep);padding:8rem 4rem}
+.what-inner{max-width:1100px;margin:0 auto}
+.what-inner .section-eyebrow{color:rgba(201,168,76,0.7)}
+.what-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,3rem);font-weight:700;color:white;line-height:1.15;margin-bottom:1rem}
+.what-title em{font-style:italic;color:var(--gold-l)}
+.what-sub{font-size:1rem;line-height:1.85;color:rgba(255,255,255,0.5);max-width:640px;margin-bottom:4rem}
+.node-preview{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:2.5rem;max-width:780px}
+.node-header{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.node-field{margin-bottom:1.25rem}
+.node-field-label{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:0.4rem}
+.node-field-body{font-size:0.95rem;line-height:1.8;color:rgba(255,255,255,0.7);font-style:italic}
+.node-field-body.plain{font-style:normal;color:rgba(255,255,255,0.6)}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid rgba(255,255,255,0.04);color:rgba(248,247,252,0.3);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.footer-note{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:5rem 1.5rem 3rem}
+  .hero-right{padding:3rem 1.5rem 4rem}
+  .hero-paths{grid-template-columns:1fr}
+  .mission{padding:5rem 1.5rem}
+  .mission-grid{grid-template-columns:1fr;gap:3rem}
+  .what{padding:5rem 1.5rem}
+  .divider{margin:0 1.5rem}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.webp" alt="EdTerm"></a>
+  <ul>
+    <li><a href="healthcare.html">For Healthcare</a></li>
+    <li><a href="universities.html">For Universities</a></li>
+    <li><a href="lis.html" class="lis-link">Learning Identity</a></li>
+    <li><a href="about.html">The Founder</a></li>
+    <li><a href="contact.html">Connect</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="healthcare.html">For Healthcare</a>
+  <a href="universities.html">For Universities</a>
+  <a href="lis.html">Learning Identity</a>
+  <a href="about.html">The Founder</a>
+  <a href="contact.html">Connect</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">EdTerm — Human Wisdom Database</p>
+    <h1 class="hero-title">Every life contains<br><em>wisdom</em><br>no one has<br>collected yet.</h1>
+    <p class="hero-sub">EdTerm captures how experienced professionals actually think, decide, and act under pressure — and makes that wisdom accessible before it disappears permanently.</p>
+    <div class="hero-paths">
+      <a href="healthcare.html" class="path-card gold-card">
+        <p class="path-label">For Healthcare</p>
+        <h3 class="path-title">Capture what retiring clinicians know before it walks out the door.</h3>
+        <p class="path-desc">$5.19M lost annually per hospital to RN turnover.</p>
+        <span class="path-arrow">Learn how EdTerm helps →</span>
+      </a>
+      <a href="universities.html" class="path-card">
+        <p class="path-label">For Universities</p>
+        <h3 class="path-title">Give journalism a new professional purpose.</h3>
+        <p class="path-desc">Peer-reviewed curriculum framework for the next era.</p>
+        <span class="path-arrow">Explore the curriculum →</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-quote">"We are losing the knowledge that matters most — not facts, but the wisdom of how to live, work, and navigate the world."</p>
+    <p class="hero-quote-attr">— EdTerm Research Framework, 2025</p>
+    <div class="hero-creds">
+      <span class="cred-badge">Peer-Reviewed · IAFOR</span>
+      <span class="cred-badge">ACE2026 · Tokyo</span>
+      <span class="cred-badge">Healthcare Pilot In Development</span>
+      <span class="cred-badge">Global Fieldwork · Thailand · Qatar</span>
+    </div>
+  </div>
+</div>
+
+<!-- MISSION -->
+<div class="mission">
+  <p class="section-eyebrow reveal">The Mission</p>
+  <div class="mission-grid">
+    <div class="mission-left reveal">
+      <h2>Every life contains wisdom<br><em>no one has collected yet.</em></h2>
+      <p>The world is getting better at storing information. It is not getting better at preserving what experienced humans actually know — the judgment, the pattern recognition, the instincts built through decades of real-world practice.</p>
+      <p>EdTerm was built to solve that problem. We conduct structured interviews with experienced professionals and transform their knowledge into Wisdom Nodes — structured, searchable artifacts that transfer what was previously untransferable.</p>
+      <p>The methodology is called Wisdom Journalism. It passed double-blind peer review through the International Academic Forum and is being presented at the Asian Conference on Education in Tokyo, November 2026.</p>
+    </div>
+    <div class="mission-right">
+      <div class="signal-card reveal">
+        <h3>Peer-Reviewed Methodology</h3>
+        <p>The Wisdom Journalism framework passed double-blind peer review through IAFOR — the International Academic Forum.</p>
+      </div>
+      <div class="signal-card reveal">
+        <h3>ACE2026 — Tokyo</h3>
+        <p>Accepted for oral presentation at the Asian Conference on Education, November 2026.</p>
+      </div>
+      <div class="signal-card reveal">
+        <h3>Healthcare Pilot In Development</h3>
+        <p>A structured pilot study focused on clinical knowledge retention is currently in active development.</p>
+      </div>
+      <div class="signal-card reveal">
+        <h3>Global Research Fieldwork</h3>
+        <p>Active fieldwork completed in Thailand and Qatar. International academic partnerships ongoing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHAT WE DO -->
+<div class="what">
+  <div class="what-inner">
+    <p class="section-eyebrow reveal">What a Wisdom Node Looks Like</p>
+    <h2 class="what-title reveal">Thirty-two years of clinical judgment.<br><em>Made searchable.</em></h2>
+    <p class="what-sub reveal">This is a real Wisdom Node. It represents what EdTerm produces — the kind of knowledge that exists in every experienced professional and currently disappears at retirement.</p>
+    <div class="node-preview reveal">
+      <div class="node-header">Node #004831 &nbsp;·&nbsp; Senior Emergency Department Nurse &nbsp;·&nbsp; 32 Years Clinical Experience</div>
+      <div class="node-field">
+        <p class="node-field-label">Human Experience</p>
+        <p class="node-field-body">"One lesson took me nearly twenty years to trust. Sometimes the patient who looks the calmest is the one I'm most worried about. When a normally anxious patient suddenly becomes unusually quiet, avoids eye contact, and their family starts answering questions for them — I stop assuming they're improving. I've learned to slow down, reassess, and trust that subtle change. More than once, those patients deteriorated within the hour."</p>
+      </div>
+      <div class="node-field">
+        <p class="node-field-label">Decision Framework</p>
+        <p class="node-field-body plain">Has the patient's behavior changed unexpectedly? Is their family behaving differently? Does my clinical intuition conflict with the vital signs? If several indicators are present — escalate. Even if standard metrics have not crossed intervention thresholds.</p>
+      </div>
+      <div class="node-field">
+        <p class="node-field-label">Transferable Wisdom</p>
+        <p class="node-field-body plain">Experienced clinicians don't ignore the data — they recognize when the data hasn't caught up to reality.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html"><img src="logo.webp" alt="EdTerm" style="height:40px;opacity:0.6;"></a>
+  <div class="footer-note">Human Wisdom Database &nbsp;·&nbsp; EdTerm Inc.</div>
+  <div class="footer-note">edterm.com</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); obs.unobserve(e.target); }
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
