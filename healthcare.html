@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EdTerm for Healthcare — Clinical Knowledge Retention</title>
+<meta name="description" content="EdTerm captures the judgment, pattern recognition, and decision-making logic of retiring clinical staff — before it disappears permanently.">
+<meta property="og:title" content="EdTerm for Healthcare — Clinical Knowledge Retention">
+<meta property="og:image" content="https://edterm.com/og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#121331;
+  --deep:#0d0d25;
+  --purple:#29056b;
+  --purple-m:#4a1d9e;
+  --purple-l:#7c3aed;
+  --gold:#c9a84c;
+  --gold-l:#e8c97a;
+  --paper:#f8f7fc;
+  --slate:#4a5568;
+  --muted:#8b8fa8;
+  --divider:rgba(41,5,107,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--navy);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 4rem;background:rgba(248,247,252,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--divider)}
+.nav-logo img{height:52px;width:auto}
+nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+nav a{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+nav a:hover,nav a.active{color:var(--purple)}
+nav a.lis-link{color:var(--purple-l);font-weight:500}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(248,247,252,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex!important}
+.mobile-menu a{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--navy)}
+
+/* HERO */
+.hero{background:linear-gradient(150deg,var(--deep) 0%,#120825 50%,#1f0a3d 100%);padding:10rem 4rem 7rem;position:relative;overflow:hidden}
+.hero-line{position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.hero-inner{max-width:1000px;margin:0 auto;position:relative;z-index:2}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.1s}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,4.5vw,4.5rem);font-weight:900;line-height:1.08;color:white;margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.3s}
+.hero-title em{font-style:italic;color:var(--gold-l)}
+.hero-sub{font-size:1.1rem;line-height:1.85;color:rgba(255,255,255,0.6);max-width:640px;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+
+/* STAT STRIP */
+.stat-strip{background:var(--gold);padding:3rem 4rem}
+.stat-strip-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.stat-item{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:var(--deep);line-height:1;margin-bottom:0.5rem}
+.stat-label{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(13,13,37,0.65);line-height:1.5}
+
+/* PROBLEM */
+.problem{padding:8rem 4rem;max-width:1000px;margin:0 auto}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.25rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem}
+.section-title em{font-style:italic;color:var(--purple)}
+.section-body{font-size:1rem;line-height:1.9;color:var(--slate);max-width:760px}
+.section-body p+p{margin-top:1.1rem}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--divider),transparent);margin:0 4rem}
+
+/* HOW IT WORKS */
+.how{padding:8rem 4rem;background:var(--paper)}
+.how-inner{max-width:1000px;margin:0 auto}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3.5rem}
+.step{padding:2rem;border-top:2px solid var(--gold);position:relative}
+.step-num{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.step h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;line-height:1.3}
+.step p{font-size:0.92rem;line-height:1.75;color:var(--slate)}
+
+/* WISDOM NODE CARD */
+.node-section{background:var(--deep);padding:8rem 4rem}
+.node-inner{max-width:1000px;margin:0 auto}
+.node-inner .section-eyebrow{color:rgba(201,168,76,0.7)}
+.node-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;color:white;line-height:1.15;margin-bottom:1rem}
+.node-title em{font-style:italic;color:var(--gold-l)}
+.node-sub{font-size:1rem;line-height:1.85;color:rgba(255,255,255,0.45);max-width:600px;margin-bottom:3.5rem}
+.wisdom-card{background:rgba(255,255,255,0.03);border:1px solid rgba(201,168,76,0.2);border-radius:8px;overflow:hidden;max-width:820px}
+.wisdom-card-header{background:rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.15);padding:1.25rem 2rem;display:flex;align-items:center;gap:1.5rem}
+.wisdom-card-id{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold)}
+.wisdom-card-meta{font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;color:rgba(255,255,255,0.35)}
+.wisdom-card-body{padding:2rem}
+.wc-field{margin-bottom:1.75rem}
+.wc-field:last-child{margin-bottom:0}
+.wc-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(201,168,76,0.6);margin-bottom:0.6rem}
+.wc-text{font-size:0.95rem;line-height:1.82;color:rgba(255,255,255,0.72)}
+.wc-text.quote{font-style:italic;border-left:2px solid rgba(201,168,76,0.3);padding-left:1.25rem;color:rgba(255,255,255,0.78)}
+.wc-text.highlight{background:rgba(201,168,76,0.06);border-radius:4px;padding:1rem 1.25rem;font-style:normal;color:rgba(255,255,255,0.85);font-weight:500}
+
+/* INVITATION */
+.invite{padding:8rem 4rem}
+.invite-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.invite-left h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,3rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem}
+.invite-left h2 em{font-style:italic;color:var(--purple)}
+.invite-left p{font-size:1rem;line-height:1.9;color:var(--slate);margin-bottom:1.1rem}
+.invite-right{background:var(--navy);border-radius:8px;padding:2.5rem;border-top:3px solid var(--gold)}
+.invite-right h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:white;margin-bottom:1.5rem;line-height:1.3}
+.invite-detail{display:flex;gap:1rem;margin-bottom:1.25rem;align-items:flex-start}
+.invite-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:0.45rem}
+.invite-detail p{font-size:0.92rem;line-height:1.7;color:rgba(255,255,255,0.6)}
+.btn-gold{display:inline-block;background:var(--gold);color:var(--deep);padding:0.9rem 2.5rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:3px;font-weight:500;transition:background 0.2s,transform 0.2s;margin-top:1.5rem}
+.btn-gold:hover{background:var(--gold-l);transform:translateY(-2px)}
+
+/* RESEARCH */
+.research{background:var(--paper);padding:6rem 4rem;border-top:1px solid var(--divider)}
+.research-inner{max-width:1000px;margin:0 auto;display:flex;gap:4rem;align-items:center}
+.research-text{flex:1}
+.research-text h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem}
+.research-text p{font-size:0.95rem;line-height:1.85;color:var(--slate)}
+.research-badges{display:flex;flex-direction:column;gap:0.75rem;flex-shrink:0}
+.research-badge{font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--purple);border:1px solid var(--divider);padding:0.6rem 1.25rem;border-radius:3px;white-space:nowrap;background:white}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid rgba(255,255,255,0.04);color:rgba(248,247,252,0.3);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.footer-note{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero,.problem,.how,.node-section,.invite,.research{padding:5rem 1.5rem 4rem}
+  .stat-strip{padding:2.5rem 1.5rem}
+  .stat-strip-inner{grid-template-columns:1fr;gap:1.5rem}
+  .steps{grid-template-columns:1fr}
+  .invite-inner{grid-template-columns:1fr;gap:3rem}
+  .research-inner{flex-direction:column;gap:2rem}
+  .divider{margin:0 1.5rem}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.webp" alt="EdTerm"></a>
+  <ul>
+    <li><a href="healthcare.html" class="active">For Healthcare</a></li>
+    <li><a href="universities.html">For Universities</a></li>
+    <li><a href="lis.html" class="lis-link">Learning Identity</a></li>
+    <li><a href="about.html">The Founder</a></li>
+    <li><a href="contact.html">Connect</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="healthcare.html">For Healthcare</a>
+  <a href="universities.html">For Universities</a>
+  <a href="lis.html">Learning Identity</a>
+  <a href="about.html">The Founder</a>
+  <a href="contact.html">Connect</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">EdTerm for Healthcare Systems</p>
+    <h1 class="hero-title">Every retirement takes<br>thirty years of clinical<br>judgment <em>out the door.</em></h1>
+    <p class="hero-sub">No protocol captures how your most experienced nurses actually think under pressure. When they retire, that knowledge is gone permanently. EdTerm was built to change that.</p>
+  </div>
+</div>
+
+<!-- STAT STRIP -->
+<div class="stat-strip">
+  <div class="stat-strip-inner">
+    <div class="stat-item reveal">
+      <p class="stat-num">$5.19M</p>
+      <p class="stat-label">Average annual cost of RN turnover<br>per hospital system</p>
+    </div>
+    <div class="stat-item reveal">
+      <p class="stat-num">40%</p>
+      <p class="stat-label">Of nurses plan to retire or leave<br>within five years</p>
+    </div>
+    <div class="stat-item reveal">
+      <p class="stat-num">0</p>
+      <p class="stat-label">Existing systems that capture<br>clinical judgment at retirement</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<div class="problem">
+  <p class="section-eyebrow reveal">The Problem</p>
+  <h2 class="section-title reveal">The knowledge gap no one<br>is <em>measuring.</em></h2>
+  <div class="section-body reveal">
+    <p>Every day, experienced clinical staff are gaining irreplaceable knowledge — learned in the room, under pressure, in situations no protocol fully anticipates. Pattern recognition built over decades. Intuitions that have saved lives. Judgment that newer staff cannot yet access because it has never been written down.</p>
+    <p>Retirement is now the third most common reason nurses leave, and the pace is accelerating toward 2030. When these clinicians walk out the door, that knowledge does not transfer. It does not get documented. It disappears permanently — and the staff left behind must rebuild it from scratch, one difficult situation at a time.</p>
+    <p>EdTerm exists because no existing system — EMR, LMS, or institutional knowledge management platform — was designed to capture how experienced clinicians actually think and decide under pressure. That is a different problem. It requires a different methodology.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<div class="how">
+  <div class="how-inner">
+    <p class="section-eyebrow reveal">What EdTerm Does</p>
+    <h2 class="section-title reveal">Structured interviews.<br><em>Permanent knowledge.</em></h2>
+    <div class="steps">
+      <div class="step reveal">
+        <p class="step-num">Step One</p>
+        <h3>We identify the right clinicians</h3>
+        <p>Working with your leadership, we identify experienced staff — nurses, physicians, specialists — whose judgment represents knowledge worth preserving before they retire.</p>
+      </div>
+      <div class="step reveal">
+        <p class="step-num">Step Two</p>
+        <h3>We conduct structured interviews</h3>
+        <p>Using the Wisdom Journalism methodology — peer-reviewed through the International Academic Forum — we elicit the judgment, pattern recognition, and decision-making logic that experienced clinicians rarely articulate directly.</p>
+      </div>
+      <div class="step reveal">
+        <p class="step-num">Step Three</p>
+        <h3>You receive a permanent archive</h3>
+        <p>Each interview produces Wisdom Nodes — structured, searchable artifacts that newer staff can access when they face situations they have not encountered before. The archive belongs to your organization.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WISDOM NODE -->
+<div class="node-section">
+  <div class="node-inner">
+    <p class="section-eyebrow reveal">A Real Wisdom Node</p>
+    <h2 class="node-title reveal">This is what thirty-two years<br>of experience <em>looks like</em> — structured.</h2>
+    <p class="node-sub reveal">This is the kind of knowledge that currently exists only in the memory of experienced clinicians. EdTerm makes it permanent.</p>
+    <div class="wisdom-card reveal">
+      <div class="wisdom-card-header">
+        <span class="wisdom-card-id">Node #004831</span>
+        <span class="wisdom-card-meta">Senior Emergency Department Nurse &nbsp;·&nbsp; 32 Years Clinical Experience</span>
+      </div>
+      <div class="wisdom-card-body">
+        <div class="wc-field">
+          <p class="wc-label">Human Experience</p>
+          <p class="wc-text quote">"One lesson took me nearly twenty years to trust. Sometimes the patient who looks the calmest is the one I'm most worried about. When a normally anxious patient suddenly becomes unusually quiet, avoids eye contact, and their family starts answering questions for them — I stop assuming they're improving. I've learned to slow down, reassess, and trust that subtle change. More than once, those patients deteriorated within the hour."</p>
+        </div>
+        <div class="wc-field">
+          <p class="wc-label">Decision Framework</p>
+          <p class="wc-text">Has the patient's behavior changed unexpectedly? Is their family behaving differently? Does my clinical intuition conflict with the vital signs? What additional assessment can I perform before assuming stability? If several indicators are present — escalate. Even if standard metrics have not crossed intervention thresholds.</p>
+        </div>
+        <div class="wc-field">
+          <p class="wc-label">Transferable Wisdom</p>
+          <p class="wc-text highlight">Experienced clinicians don't ignore the data — they recognize when the data hasn't caught up to reality.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INVITATION -->
+<div class="invite">
+  <div class="invite-inner">
+    <div class="invite-left reveal">
+      <p class="section-eyebrow">The Invitation</p>
+      <h2>We are looking for one<br>hospital system to <em>build this with.</em></h2>
+      <p>EdTerm is inviting one hospital system to serve as a founding research site. This is not a vendor relationship. It is a research partnership — with a direct, tangible output for your organization.</p>
+      <p>If your institution is facing an accelerating retirement wave and wants to do something meaningful about the knowledge that leaves with it, we would like to have a conversation.</p>
+    </div>
+    <div class="invite-right reveal">
+      <h3>What participation includes</h3>
+      <div class="invite-detail">
+        <div class="invite-dot"></div>
+        <p>No cost to participate — this is a research initiative, not a product purchase</p>
+      </div>
+      <div class="invite-detail">
+        <div class="invite-dot"></div>
+        <p>Structured Wisdom Journalism interviews with your retiring clinical staff</p>
+      </div>
+      <div class="invite-detail">
+        <div class="invite-dot"></div>
+        <p>A permanent archive of Wisdom Nodes delivered to your organization</p>
+      </div>
+      <div class="invite-detail">
+        <div class="invite-dot"></div>
+        <p>Co-authorship opportunities on peer-reviewed research publications</p>
+      </div>
+      <div class="invite-detail">
+        <div class="invite-dot"></div>
+        <p>Recognition as a founding partner in an internationally recognized research initiative</p>
+      </div>
+      <a href="contact.html" class="btn-gold">Request a Conversation</a>
+    </div>
+  </div>
+</div>
+
+<!-- RESEARCH CREDENTIALS -->
+<div class="research">
+  <div class="research-inner">
+    <div class="research-text reveal">
+      <h3>The methodology is peer-reviewed and internationally recognized.</h3>
+      <p>Wisdom Journalism passed double-blind peer review through the International Academic Forum. EdTerm is presenting at the Asian Conference on Education in Tokyo, November 2026. A healthcare pilot study is currently in active development. This is not a startup pitch — it is a research initiative with academic standing.</p>
+    </div>
+    <div class="research-badges reveal">
+      <span class="research-badge">Peer-Reviewed · IAFOR</span>
+      <span class="research-badge">ACE2026 · Tokyo</span>
+      <span class="research-badge">Healthcare Pilot In Development</span>
+      <span class="research-badge">Global Fieldwork · Thailand · Qatar</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html"><img src="logo.webp" alt="EdTerm" style="height:40px;opacity:0.6;"></a>
+  <div class="footer-note">EdTerm for Healthcare &nbsp;·&nbsp; partners@edterm.com</div>
+  <div class="footer-note">edterm.com</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); obs.unobserve(e.target); }
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
