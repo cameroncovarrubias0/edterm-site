@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect — EdTerm Research & Partnership</title>
+<meta name="description" content="EdTerm is seeking hospital systems, university partners, and academic collaborators. No cost to participate. Direct research partnership.">
+<meta property="og:title" content="Connect — EdTerm Research & Partnership">
+<meta property="og:image" content="https://edterm.com/og-image.png">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#121331;
+  --deep:#0d0d25;
+  --purple:#29056b;
+  --purple-m:#4a1d9e;
+  --purple-l:#7c3aed;
+  --gold:#c9a84c;
+  --gold-l:#e8c97a;
+  --paper:#f8f7fc;
+  --aged:#ede9f7;
+  --slate:#4a5568;
+  --muted:#8b8fa8;
+  --divider:rgba(41,5,107,0.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--navy);font-family:'Inter',sans-serif;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0.9rem 4rem;background:rgba(248,247,252,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--divider)}
+.nav-logo img{height:52px;width:auto}
+nav ul{list-style:none;display:flex;gap:2rem;align-items:center}
+nav a{font-family:'DM Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s}
+nav a:hover,nav a.active{color:var(--purple)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(248,247,252,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem}
+.mobile-menu.open{display:flex!important}
+.mobile-menu a{font-family:'DM Mono',monospace;font-size:1rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--navy)}
+
+/* HERO — SPLIT */
+.hero{min-height:60vh;display:grid;grid-template-columns:1fr 1fr;padding-top:72px}
+.hero-left{background:var(--paper);padding:6rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.hero-right{background:linear-gradient(150deg,var(--navy) 0%,#1a0545 50%,var(--purple) 100%);padding:6rem 5rem 5rem;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero-right::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;border:1px solid rgba(255,255,255,0.05);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.75rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.1s}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,3.8vw,3.8rem);font-weight:900;line-height:1.08;color:var(--navy);margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.7s ease forwards 0.3s}
+.hero-title em{font-style:italic;color:var(--purple)}
+.hero-sub{font-size:1rem;line-height:1.85;color:var(--slate);max-width:440px;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-right-content{position:relative;z-index:2;opacity:0;animation:fadeUp 0.7s ease forwards 0.5s}
+.hero-direct{margin-bottom:2rem}
+.hero-direct-label{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:1rem}
+.direct-link{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.75rem;text-decoration:none}
+.direct-link-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.direct-link-dot.gold{background:var(--gold)}
+.direct-link-dot.purple{background:var(--purple-l)}
+.direct-link-text{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;color:rgba(255,255,255,0.6);transition:color 0.2s}
+.direct-link:hover .direct-link-text{color:white}
+.direct-link-desc{font-size:0.8rem;color:rgba(255,255,255,0.35);margin-left:1.3rem;margin-top:-0.4rem;margin-bottom:0.5rem}
+
+/* PARTNER SECTIONS */
+.partners{max-width:1100px;margin:0 auto;padding:7rem 4rem}
+.partners-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem}
+.partner-block{background:white;border-radius:8px;border:1.5px solid var(--divider);overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s}
+.partner-block:hover{border-color:rgba(41,5,107,0.2);box-shadow:0 8px 32px rgba(18,19,49,0.08)}
+.partner-block.gold-block{border-top:3px solid var(--gold)}
+.partner-block.purple-block{border-top:3px solid var(--purple-l)}
+.partner-block-header{padding:2rem 2rem 1.25rem}
+.partner-block-eyebrow{font-family:'DM Mono',monospace;font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem}
+.gold-block .partner-block-eyebrow{color:var(--gold)}
+.purple-block .partner-block-eyebrow{color:var(--purple-l)}
+.partner-block h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:0.75rem}
+.partner-block p{font-size:0.92rem;line-height:1.78;color:var(--slate)}
+.partner-block-details{padding:0 2rem 2rem;display:flex;flex-direction:column;gap:0.6rem}
+.detail-item{display:flex;gap:0.75rem;align-items:flex-start}
+.detail-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:0.45rem}
+.gold-block .detail-dot{background:var(--gold)}
+.purple-block .detail-dot{background:var(--purple-l)}
+.detail-item p{font-size:0.88rem;line-height:1.65;color:var(--slate)}
+
+/* FORM SECTION */
+.form-section{background:var(--deep);padding:7rem 4rem}
+.form-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.form-left{position:sticky;top:7rem}
+.form-eyebrow{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(201,168,76,0.7);margin-bottom:1.25rem}
+.form-left h2{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:700;color:white;line-height:1.15;margin-bottom:1.25rem}
+.form-left h2 em{font-style:italic;color:var(--gold-l)}
+.form-left p{font-size:0.95rem;line-height:1.85;color:rgba(255,255,255,0.45);margin-bottom:2rem}
+.form-emails{display:flex;flex-direction:column;gap:0.6rem}
+.form-email-item{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.06em}
+.form-email-item a{color:rgba(201,168,76,0.7);text-decoration:none;transition:color 0.2s}
+.form-email-item a:hover{color:var(--gold-l)}
+.form-email-label{color:rgba(255,255,255,0.25);margin-right:0.5rem}
+
+/* FORM */
+.form-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:2.5rem}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.5rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:0.75rem 1rem;border:1.5px solid rgba(255,255,255,0.1);border-radius:3px;font-family:'Inter',sans-serif;font-size:0.9rem;color:white;background:rgba(255,255,255,0.05);transition:border-color 0.2s;outline:none}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(201,168,76,0.5);background:rgba(255,255,255,0.07)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(255,255,255,0.25)}
+.form-group textarea{resize:vertical;min-height:120px;line-height:1.7}
+.form-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b8fa8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.form-group select option{background:var(--navy);color:white}
+.btn-submit{width:100%;background:var(--gold);color:var(--deep);padding:1rem 2rem;font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border:none;cursor:pointer;border-radius:3px;font-weight:600;transition:background 0.2s,transform 0.2s;margin-top:0.5rem}
+.btn-submit:hover{background:var(--gold-l);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid rgba(255,255,255,0.04);color:rgba(248,247,252,0.3);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.footer-note{font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  nav ul{display:none}
+  .hamburger{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:5rem 1.5rem 3rem}
+  .hero-right{padding:3rem 1.5rem 4rem}
+  .partners{padding:5rem 1.5rem}
+  .partners-grid{grid-template-columns:1fr}
+  .form-section{padding:5rem 1.5rem}
+  .form-inner{grid-template-columns:1fr;gap:3rem}
+  .form-left{position:static}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.webp" alt="EdTerm"></a>
+  <ul>
+    <li><a href="healthcare.html">For Healthcare</a></li>
+    <li><a href="universities.html">For Universities</a></li>
+    <li><a href="lis.html">Learning Identity</a></li>
+    <li><a href="about.html">The Founder</a></li>
+    <li><a href="contact.html" class="active">Connect</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('open')">✕</button>
+  <a href="healthcare.html">For Healthcare</a>
+  <a href="universities.html">For Universities</a>
+  <a href="lis.html">Learning Identity</a>
+  <a href="about.html">The Founder</a>
+  <a href="contact.html">Connect</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Start a Conversation</p>
+    <h1 class="hero-title">We are looking for<br>the right <em>partners.</em></h1>
+    <p class="hero-sub">EdTerm is at the research stage — actively seeking hospital systems, university partners, and academic collaborators. Fill out the form or reach out directly.</p>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-content">
+      <div class="hero-direct">
+        <p class="hero-direct-label">Reach out directly</p>
+        <a href="mailto:partners@edterm.com" class="direct-link">
+          <div class="direct-link-dot gold"></div>
+          <span class="direct-link-text">partners@edterm.com</span>
+        </a>
+        <p class="direct-link-desc">Healthcare & university partnerships</p>
+        <a href="mailto:research@edterm.com" class="direct-link">
+          <div class="direct-link-dot purple"></div>
+          <span class="direct-link-text">research@edterm.com</span>
+        </a>
+        <p class="direct-link-desc">Research inquiries & academic collaboration</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO WE'RE LOOKING FOR -->
+<div class="partners">
+  <p class="section-eyebrow reveal" style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-l);margin-bottom:1.25rem">Who We're Looking For</p>
+  <h2 class="reveal" style="font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3vw,2.8rem);font-weight:700;line-height:1.15;margin-bottom:0.5rem">Two paths in. <em style="font-style:italic;color:var(--purple)">Both matter.</em></h2>
+  <div class="partners-grid">
+
+    <div class="partner-block gold-block reveal">
+      <div class="partner-block-header">
+        <p class="partner-block-eyebrow">For Hospital Systems</p>
+        <h3>Founding Research Site — Clinical Knowledge Retention</h3>
+        <p>We are inviting one hospital system to serve as a founding research site. No cost to participate. Your organization receives a structured archive of Wisdom Nodes from retiring clinical staff as a direct output of the research.</p>
+      </div>
+      <div class="partner-block-details">
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Chief Nursing Officers and VP-level workforce decision-makers</p>
+        </div>
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Hospital systems facing accelerating retirement among experienced clinical staff</p>
+        </div>
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Organizations looking to preserve clinical judgment before it disappears permanently</p>
+        </div>
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>No cost to participate — this is a research initiative, not a product purchase</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="partner-block purple-block reveal">
+      <div class="partner-block-header">
+        <p class="partner-block-eyebrow">For Universities</p>
+        <h3>Academic Research Partnership — Wisdom Journalism Curriculum</h3>
+        <p>We are seeking journalism and communications programs ready to adopt Wisdom Journalism as a curriculum framework — training students to collect and preserve lived human experience as structured knowledge.</p>
+      </div>
+      <div class="partner-block-details">
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Journalism and communications department heads and deans</p>
+        </div>
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Institutions looking to give students a professional purpose beyond traditional news media</p>
+        </div>
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Co-authorship on peer-reviewed research publications and international conference participation</p>
+        </div>
+        <div class="detail-item">
+          <div class="detail-dot"></div>
+          <p>Named participation in the Human Wisdom Database global research network</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-section">
+  <div class="form-inner">
+    <div class="form-left reveal">
+      <p class="form-eyebrow">Get in Touch</p>
+      <h2>Send a message.<br><em>We respond personally.</em></h2>
+      <p>Every inquiry goes directly to Cameron Covarrubias. We are a small team at the research stage — if what you are reading resonates, the conversation starts here.</p>
+      <div class="form-emails">
+        <p class="form-email-item"><span class="form-email-label">Partnerships</span><a href="mailto:partners@edterm.com">partners@edterm.com</a></p>
+        <p class="form-email-item"><span class="form-email-label">Research</span><a href="mailto:research@edterm.com">research@edterm.com</a></p>
+      </div>
+    </div>
+
+    <div class="form-card reveal">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="your@institution.edu">
+      </div>
+      <div class="form-group">
+        <label for="org">Organization</label>
+        <input type="text" id="org" name="org" placeholder="Hospital system, university, or institution">
+      </div>
+      <div class="form-group">
+        <label for="type">I am reaching out as a...</label>
+        <select id="type" name="type">
+          <option value="" disabled selected>Select your role</option>
+          <option value="hospital">Hospital System — Clinical Knowledge Retention</option>
+          <option value="university">University — Wisdom Journalism Curriculum</option>
+          <option value="researcher">Researcher / Academic Collaborator</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Tell us about your interest</label>
+        <textarea id="message" name="message" placeholder="What drew you to EdTerm? What are you working on? What kind of collaboration are you imagining?"></textarea>
+      </div>
+      <button class="btn-submit" id="send-btn">Send Message</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html"><img src="logo.webp" alt="EdTerm" style="height:40px;opacity:0.6;"></a>
+  <div class="footer-note">EdTerm Inc. &nbsp;·&nbsp; Research Stage</div>
+  <div class="footer-note">edterm.com</div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*100); obs.unobserve(e.target); }
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+document.getElementById('send-btn').addEventListener('click', async function(e) {
+  e.preventDefault();
+  const name    = document.getElementById('name').value.trim();
+  const email   = document.getElementById('email').value.trim();
+  const org     = document.getElementById('org').value.trim();
+  const type    = document.getElementById('type').value;
+  const message = document.getElementById('message').value.trim();
+
+  if (!name || !email || !message) {
+    alert('Please fill in your name, email, and message before sending.');
+    return;
+  }
+
+  const btn = document.getElementById('send-btn');
+  btn.textContent = 'Sending...';
+  btn.style.opacity = '0.7';
+
+  try {
+    const res = await fetch('https://formspree.io/f/mwvgkkvr', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, organization: org, role: type, message })
+    });
+
+    if (res.ok) {
+      btn.textContent = 'Message Sent';
+      btn.style.background = '#29056b';
+      btn.style.color = 'white';
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('org').value = '';
+      document.getElementById('message').value = '';
+    } else {
+      btn.textContent = 'Send Message';
+      btn.style.opacity = '1';
+      alert('Something went wrong. Please email us directly at partners@edterm.com');
+    }
+  } catch(err) {
+    btn.textContent = 'Send Message';
+    btn.style.opacity = '1';
+    alert('Something went wrong. Please email us directly at partners@edterm.com');
+  }
+});
+</script>
+</body>
+</html>
