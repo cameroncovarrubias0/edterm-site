@@ -1,10 +1,10 @@
 // Site-wide settings. Keep page copy in the pages, not here.
 
 /**
- * Preview builds are noindexed. At launch set this to false.
+ * Site-wide noindex switch. false = pages can be indexed (launch setting). Set true to hide a preview build.
  * /pitch is unaffected: it is noindexed by its own meta tag and the X-Robots-Tag header in vercel.json, permanently.
  */
-export const NOINDEX = true;
+export const NOINDEX = false;
 
 export const SITE_NAME = 'EdTerm';
 export const CONTACT_EMAIL = 'partners@edterm.com';

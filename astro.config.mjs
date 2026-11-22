@@ -10,8 +10,8 @@ export default defineConfig({
   build: { format: 'file' },
   integrations: [
     sitemap({
-      // /pitch is never listed; /styleguide is an internal review page.
-      filter: (page) => !/\/(pitch|styleguide)(\.html)?$/.test(page),
+      // /pitch is never listed (it lives in public/, so this is a safeguard).
+      filter: (page) => !/\/pitch(\.html)?$/.test(page),
     }),
   ],
   vite: { plugins: [tailwindcss()] },

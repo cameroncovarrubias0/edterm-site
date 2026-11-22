@@ -20,8 +20,7 @@ The full brief lives outside the repo at `../EdTerm-Site/EdTerm_Site_Brief.md` (
 - `src/layouts/BaseLayout.astro` owns `<head>` (title, description, canonical, og, robots), utility bar + sticky header, footer, skip link, and the `[data-reveal]` script. Every page uses it and passes its own `title` and `description`.
 - Shared components in `src/components/`: `Hero` (label + h1 + one supporting line in the default slot), `Section` (tone white/paper/deep, layout split/stack, optional heading, `wide` slot), `ProofCard`, `CTA`, `Button`, `Logo`, `LayerBands` (the one recurring decorative motif).
 - `src/assets/edterm-logo.png` is the supplied EdTerm Inc. logo with margins trimmed. It has a white background, so only place it on white or paper.
-- `/styleguide` is an internal, always-noindexed component review page excluded from the sitemap. Remove it before launch.
-- `astro.config.mjs` uses `build.format: 'file'` and `trailingSlash: 'never'` so pages emit as `name.html` for Vercel `cleanUrls`. The sitemap filter excludes `/pitch` and `/styleguide`.
+- `astro.config.mjs` uses `build.format: 'file'` and `trailingSlash: 'never'` so pages emit as `name.html` for Vercel `cleanUrls`. The sitemap filter excludes `/pitch`.
 - Pages and URLs: `/` Home, `/reasoning-layer`, `/health-systems`, `/education`, `/evidence`, `/company`, `/early-access`.
 - Redirects (vercel.json): `/healthcare` → `/health-systems`, `/universities` → `/education`, `/contact` → `/early-access`, `/about` → `/company`. `vercel.json` must include `"cleanUrls": true`.
 - `lis.html` (Learning Identity) is parked: leave it out of the new build and never link it.
@@ -29,7 +28,7 @@ The full brief lives outside the repo at `../EdTerm-Site/EdTerm_Site_Brief.md` (
 - Fonts: Plus Jakarta Sans for headlines, Inter for body, DM Mono for small labels, Playfair Display only for the founder quote.
 - Color: navy `#121331`, deep `#0d0d25`, purple `#29056b` / `#4a1d9e` / `#7c3aed`, gold `#c9a84c` / `#e8c97a`, paper `#f8f7fc`. Headings on light sections are purple (`#4a1d9e`). Gold is used for text only on navy/deep backgrounds (it fails contrast on light ones). Keep the logo exactly as supplied.
 - Hero copy for Home, The Reasoning Layer and For Health Systems must be the exact text in the brief (section 1a), including its bracketed guardrail edits. Do not reintroduce the original wording.
-- The whole preview build is `noindex` via the meta tag, controlled by `NOINDEX` in `src/site.ts`. `public/robots.txt` allows crawling on purpose, so crawlers can see the noindex tag.
+- Indexing is controlled by `NOINDEX` in `src/site.ts`. It is `false` (launch setting): pages are indexable. Setting it to `true` adds a noindex meta tag to every page. `public/robots.txt` allows crawling.
 - Home hero: the Hero A headline exactly as in the brief, with the owner-approved supporting line in the hero ("EdTerm is a healthcare data infrastructure company building the reasoning layer that completes what EHRs and genomic databases cannot capture: how experienced clinicians reason through a decision before it's lost to turnover. Everyday expertise is walking out the door."). The original four-sentence Hero A subtext goes, unchanged, in the first section below the hero. Hero label: "Healthcare data infrastructure".
 - Do not use the Resend, Claude Docs or Higgsfield connectors for this project.
 - Workflow: design system and Home first, owner reviews screenshots, then one page at a time. Confirm with the owner before building each major section.
@@ -61,4 +60,4 @@ The full brief lives outside the repo at `../EdTerm-Site/EdTerm_Site_Brief.md` (
 
 ## Before launch
 
-Set `NOINDEX = false` in `src/site.ts` (this leaves `/pitch` noindexed), delete `src/pages/styleguide.astro`, merge `redesign` into `main`, verify edterm.com, and confirm `/pitch` is unlinked and noindexed.
+Done on `redesign`: `NOINDEX = false` (with `/pitch` still noindexed) and `/styleguide` deleted. Remaining: merge `redesign` into `main`, verify edterm.com, and confirm `/pitch` is unlinked and noindexed.
