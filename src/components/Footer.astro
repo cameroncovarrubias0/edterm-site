@@ -1,0 +1,53 @@
+---
+import Logo from './Logo.astro';
+import LayerBands from './LayerBands.astro';
+import { NAV, EARLY_ACCESS, CONTACT_EMAIL } from '../site';
+
+const year = new Date().getFullYear();
+// Never link /pitch or /lis here.
+---
+
+<footer class="border-t border-line bg-white">
+  <div class="container-site grid-12 gap-y-10 py-16">
+    <div class="col-span-12 md:col-span-5">
+      <a href="/" aria-label="EdTerm home" class="inline-block">
+        <Logo height={44} />
+      </a>
+      <p class="mt-5 max-w-[36ch] text-small text-ink-muted">
+        Healthcare data infrastructure for the reasoning layer.
+      </p>
+    </div>
+
+    <nav aria-label="Footer" class="col-span-12 sm:col-span-6 md:col-span-4">
+      <ul class="grid gap-1 text-small">
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href} class="inline-flex min-h-11 items-center text-navy hover:text-purple-700">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={EARLY_ACCESS.href} class="inline-flex min-h-11 items-center text-navy hover:text-purple-700">
+            {EARLY_ACCESS.label}
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="col-span-12 text-small sm:col-span-6 md:col-span-3">
+      <a href={`mailto:${CONTACT_EMAIL}`} class="inline-flex min-h-11 items-center text-navy hover:text-purple-700">
+        {CONTACT_EMAIL}
+      </a>
+    </div>
+  </div>
+
+  <div class="container-site">
+    <LayerBands class="text-navy" />
+  </div>
+  <div class="container-site flex flex-col gap-2 py-6 text-small text-ink-muted sm:flex-row sm:justify-between">
+    <p>© {year} EdTerm Inc.</p>
+  </div>
+</footer>

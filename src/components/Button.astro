@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Variant = 'primary' | 'secondary' | 'on-dark';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  href: string;
+  /** primary: gold on navy text, the Early Access action. secondary: navy fill. on-dark: outline for dark bands. */
+  variant?: Variant;
+  /** compact: header use, tighter padding on small screens. */
+  size?: 'compact' | 'md' | 'lg';
+  class?: string;
+}
+
+const { href, variant = 'primary', size = 'md', class: className, ...rest } = Astro.props;
+
+const variants: Record<Variant, string> = {
+  primary: 'bg-gold-500 text-navy hover:bg-gold-300',
+  secondary: 'bg-navy text-white hover:bg-purple-900',
+  'on-dark': 'border border-white/40 text-white hover:border-gold-300 hover:text-gold-300',
+};
+const sizes = {
+  compact: 'min-h-11 px-4 text-small sm:px-5',
+  md: 'min-h-11 px-5 text-small',
+  lg: 'min-h-14 px-8 text-body',
+};
+---
+
+<a
+  href={href}
+  class:list={[
+    'inline-flex items-center justify-center rounded-pill font-display font-bold whitespace-nowrap transition-colors duration-200',
+    variants[variant],
+    sizes[size],
+    className,
+  ]}
+  {...rest}
+>
+  <slot />
+</a>

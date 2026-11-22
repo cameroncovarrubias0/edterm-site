@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://edterm.com/sitemap-index.xml

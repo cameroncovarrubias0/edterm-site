@@ -1,0 +1,48 @@
+---
+/**
+ * One idea per section: a colored heading and two to three lines of plain text.
+ * - tone: background. Headings are purple-700 on light, gold-300 on deep (contrast rule).
+ * - layout "split": heading cols 1–5, body cols 7–12 on desktop. "stack": heading over body, body capped at 65ch.
+ * - heading is optional (e.g. a lead-only section directly under a hero).
+ */
+interface Props {
+  tone?: 'white' | 'paper' | 'deep';
+  layout?: 'split' | 'stack';
+  heading?: string;
+  headingLevel?: 'h2' | 'h3';
+  id?: string;
+  class?: string;
+}
+
+const { tone = 'white', layout = 'split', heading, headingLevel = 'h2', id, class: className } = Astro.props;
+const H = headingLevel;
+
+const toneClass = {
+  white: 'bg-white text-navy',
+  paper: 'bg-paper text-navy',
+  deep: 'on-dark bg-deep text-white/85',
+}[tone];
+const headingColor = tone === 'deep' ? 'text-gold-300' : 'text-purple-700';
+const isSplit = layout === 'split' && heading;
+---
+
+<section id={id} class:list={['py-section', toneClass, className]}>
+  <div class="container-site grid-12 gap-y-6" data-reveal>
+    {
+      heading && (
+        <H class:list={['col-span-12 font-bold', H === 'h2' ? 'text-h2' : 'text-h3', headingColor, isSplit && 'lg:col-span-5']}>
+          {heading}
+        </H>
+      )
+    }
+    <div
+      class:list={[
+        'col-span-12 max-w-(--container-prose) space-y-4',
+        isSplit ? 'lg:col-span-6 lg:col-start-7 lg:pt-2' : 'lg:col-span-8',
+      ]}
+    >
+      <slot />
+    </div>
+    {Astro.slots.has('wide') && <div class="col-span-12 mt-6"><slot name="wide" /></div>}
+  </div>
+</section>

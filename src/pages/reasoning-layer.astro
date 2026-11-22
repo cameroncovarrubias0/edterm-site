@@ -1,0 +1,61 @@
+---
+// The Reasoning Layer: what it is and where it sits in the stack.
+// Hero B from the brief, word for word (guardrail edits already applied in the brief's text).
+// No Wisdom Node excerpt yet (owner decision); no capture protocol, node structure or counts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import StackDiagram from '../components/StackDiagram.astro';
+import CaptureSteps from '../components/CaptureSteps.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="The Reasoning Layer — EdTerm"
+  description="Patient data tells you what happened. Genomic data tells you what's possible. The wisdom layer tells you how experienced clinicians interpret all of it."
+>
+  <!-- Hero B, sentence 1 -->
+  <Hero
+    label="The Reasoning Layer"
+    headline="The wisdom layer is the missing context layer for everything else in healthcare data."
+  />
+
+  <!-- Hero B, continued -->
+  <Section tone="white" layout="stack">
+    <p class="text-lead">Medical data is abundant and growing. The problem isn't the volume of data. The problem is interpretation.</p>
+    <p>
+      Data doesn't diagnose. Data doesn't decide. A clinician reads the data, applies decades of pattern recognition,
+      weighs competing signals, and makes a judgment call.
+    </p>
+    <p>
+      AI systems trained on clinical outcomes can tell you what happened to similar patients. They cannot tell you how
+      an experienced clinician would read the same presentation.
+    </p>
+  </Section>
+
+  <!-- Hero B, close + the stack -->
+  <section class="bg-paper py-section" aria-labelledby="stack-heading">
+    <div class="container-site grid-12 items-center gap-y-12">
+      <div class="col-span-12 lg:col-span-5" data-reveal>
+        <h2 id="stack-heading" class="text-h2 font-bold text-purple-700">Where the layer sits</h2>
+        <p class="mt-6 max-w-(--container-prose)">
+          Patient data tells you what happened. Genomic data tells you what's possible. The wisdom layer tells you how
+          experienced clinicians interpret all of it.
+        </p>
+        <p class="mt-6 max-w-(--container-prose) font-display text-lead font-bold text-navy">
+          The capture side doesn't compete with medical data. It completes it.
+        </p>
+      </div>
+      <div class="col-span-12 lg:col-span-6 lg:col-start-7">
+        <StackDiagram />
+      </div>
+    </div>
+  </section>
+
+  <!-- How the layer is built -->
+  <Section tone="white" layout="stack" heading="How the layer is built" id="how-its-built">
+    <CaptureSteps slot="wide" tone="white" class="lg:mt-6" />
+  </Section>
+
+  <CTA heading="Early Access" buttonLabel="Start a conversation" />
+</BaseLayout>

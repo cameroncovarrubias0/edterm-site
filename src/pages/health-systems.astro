@@ -1,0 +1,85 @@
+---
+// For Health Systems: the data-layer story in depth. Copy is from the brief (Hero C with guardrail edits,
+// section 1 positioning lines) or owner-approved. See CLAUDE.md before editing.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SourcedStat from '../components/SourcedStat.astro';
+import Button from '../components/Button.astro';
+import CTA from '../components/CTA.astro';
+import CaptureSteps from '../components/CaptureSteps.astro';
+import { EARLY_ACCESS } from '../site';
+
+---
+
+<BaseLayout
+  title="For Health Systems — EdTerm"
+  description="EdTerm captures how your most experienced clinicians reason, so that knowledge can inform the systems you use."
+>
+  <!-- Hero C (brief, with guardrail edits) -->
+  <Hero
+    label="For health systems"
+    headline="The competitive advantage in healthcare AI won't come from the algorithm. It will come from what you train it on."
+  >
+    <p>
+      One model doesn't fit every health system. Every organization has thousands of hours of clinical judgment built
+      into how it runs, and that knowledge isn't in the EHR or the imaging data. It lives in people. To get the most
+      from AI in your organization, it has to learn from the people who run it. EdTerm captures how your most
+      experienced clinicians reason, so that knowledge can inform the systems you use.
+    </p>
+    <Button slot="actions" href={EARLY_ACCESS.href} size="lg">Start a conversation</Button>
+  </Hero>
+
+  <!-- Retention of experienced clinicians' knowledge -->
+  <Section tone="white" heading="Keep what experienced clinicians know" id="retention">
+    <p>
+      EHRs and imaging record what happened. Genomic databases record what is possible. Neither records how an
+      experienced clinician interpreted it.
+    </p>
+    <p>EdTerm captures that reasoning.</p>
+    <!-- Connected sequence: a thin line joins the steps, left → right on desktop, top → bottom on mobile. -->
+    <CaptureSteps slot="wide" tone="white" class="lg:mt-6" />
+  </Section>
+
+  <!-- What the database becomes (owner-approved copy, verbatim) -->
+  <Section tone="white" heading="What the database becomes as it grows" id="database">
+    <p>The Human Wisdom Database is a structured, searchable archive of how experienced clinicians reason.</p>
+    <p>
+      A product delivers an answer. Infrastructure is what answers are built on. The database doesn’t tell a clinician
+      what to do. It holds the reasoning that decision support, clinical AI and training systems can reference.
+    </p>
+    <p>
+      Each Wisdom Node adds to the archive. As it grows, it can show where experienced clinicians agree, where they
+      differ, and why: patterns no single clinician could describe alone.
+    </p>
+  </Section>
+
+  <!-- Decision support and training: longer-term uses -->
+  <Section tone="paper" heading="Decision support and training, over time" id="longer-term">
+    <p>Clinical AI, decision support and training systems can reference expert reasoning, not only outcomes.</p>
+    <p>These are longer-term uses. The first step is capture.</p>
+  </Section>
+
+  <!-- Sourced statistic with count-up -->
+  <section class="on-dark bg-deep py-section" aria-labelledby="turnover-heading">
+    <div class="container-site grid-12 items-end gap-y-10">
+      <div class="col-span-12 lg:col-span-7" data-reveal>
+        <h2 id="turnover-heading" class="sr-only">The cost of RN turnover</h2>
+        <SourcedStat
+          value={5.19}
+          decimals={2}
+          prefix="$"
+          suffix="M"
+          label="Average annual hospital RN turnover cost"
+          source="NSI National Health Care Retention & RN Staffing Report, 2026 edition (2025 data)"
+        />
+      </div>
+      <div class="col-span-12 max-w-(--container-prose) text-lead text-white/85 lg:col-span-4 lg:col-start-9" data-reveal>
+        <p>When experienced clinicians leave, their reasoning leaves with them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- One closing call to action -->
+  <CTA heading="Early Access" buttonLabel="Start a conversation" />
+</BaseLayout>

@@ -1,0 +1,67 @@
+---
+/**
+ * A sourced statistic with a count-up. Only for numbers that carry a source line on the page.
+ * The final value is in the HTML, so it is correct without JS, with reduced motion and for screen readers;
+ * the count-up only animates the visible digits.
+ */
+interface Props {
+  value: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  /** What the number is. */
+  label: string;
+  /** Full source citation, shown under the number. */
+  source: string;
+  tone?: 'dark' | 'light';
+}
+const { value, decimals = 0, prefix = '', suffix = '', label, source, tone = 'dark' } = Astro.props;
+const final = `${prefix}${value.toFixed(decimals)}${suffix}`;
+const dark = tone === 'dark';
+---
+
+<figure data-countup data-value={value} data-decimals={decimals} data-prefix={prefix} data-suffix={suffix}>
+  <p class:list={['font-display text-[clamp(4rem,2.5rem+7vw,8rem)] leading-none font-extrabold tracking-[-0.03em] tabular-nums', dark ? 'text-gold-300' : 'text-purple-700']}>
+    <span class="sr-only">{final}</span>
+    <span aria-hidden="true" data-countup-digits>{final}</span>
+  </p>
+  <figcaption class="mt-5 max-w-[40ch]">
+    <span class:list={['block text-lead font-semibold', dark ? 'text-white' : 'text-navy']}>{label}</span>
+    <span class:list={['mt-4 block font-mono text-small', dark ? 'text-white/70' : 'text-ink-muted']}>
+      Source: {source}
+    </span>
+  </figcaption>
+</figure>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('[data-countup]').forEach((el) => {
+    const out = el.querySelector<HTMLElement>('[data-countup-digits]');
+    if (!out || reduce || !('IntersectionObserver' in window)) return;
+    const value = Number(el.dataset.value);
+    const decimals = Number(el.dataset.decimals);
+    const prefix = el.dataset.prefix ?? '';
+    const suffix = el.dataset.suffix ?? '';
+    const fmt = (n: number) => `${prefix}${n.toFixed(decimals)}${suffix}`;
+    out.textContent = fmt(0);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        const duration = 1600;
+        const start = performance.now();
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          out.textContent = fmt(value * eased);
+          if (t < 1) requestAnimationFrame(tick);
+          else out.textContent = fmt(value);
+        };
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 },
+    );
+    io.observe(el);
+  });
+</script>

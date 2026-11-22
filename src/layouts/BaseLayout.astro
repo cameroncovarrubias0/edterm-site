@@ -1,0 +1,88 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource/dm-mono/500.css';
+import '@fontsource/playfair-display/400-italic.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { NOINDEX, SITE_NAME } from '../site';
+
+interface Props {
+  /** Full <title>. Each page sets its own. */
+  title: string;
+  description: string;
+  /** Path of a page-specific og image in /public; defaults to the site image. */
+  ogImage?: string;
+  /** Force noindex on a single page regardless of NOINDEX. */
+  noindex?: boolean;
+}
+
+const { title, description, ogImage = '/og-image.png', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site);
+const ogUrl = new URL(ogImage, Astro.site);
+const robots = NOINDEX || noindex;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {robots && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- ?v=2: transparent versions; the query makes browsers drop the cached white-background icons. -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <meta name="theme-color" content="#121331" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Marks JS as available before first paint so reveal styles never flash. -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-pill focus:bg-navy focus:px-5 focus:py-3 focus:text-white"
+    >
+      Skip to content
+    </a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Soft reveal for [data-reveal] blocks and [data-build] sequences (stack diagram, loop line).
+      // CSS only hides them when motion is allowed.
+      const els = document.querySelectorAll<HTMLElement>('[data-reveal], [data-build]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-revealed');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('is-revealed'));
+      }
+    </script>
+  </body>
+</html>

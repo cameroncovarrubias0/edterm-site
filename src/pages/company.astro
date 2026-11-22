@@ -1,0 +1,43 @@
+---
+// Company. Short by design: one line, the founder quote, the founder note, one call to action.
+// Copy is owner-supplied, verbatim. No biography, credentials, photo, or hospitality/culinary references.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="Company — EdTerm"
+  description="EdTerm is a healthcare data infrastructure company building the reasoning layer."
+>
+  <Hero label="Company" headline="EdTerm is a healthcare data infrastructure company building the reasoning layer." />
+
+  <Section tone="white" layout="stack" id="founder">
+    <figure>
+      <blockquote class="font-quote text-quote italic text-navy">
+        <p>“You can read something in a book, or you can do it for 30 years. They are not the same.”</p>
+      </blockquote>
+    </figure>
+
+    <div class="space-y-4 pt-10 sm:pt-14">
+      <p>
+        The most useful knowledge was never in the classroom. I knew that early. It lives in people: in what they’ve
+        learned from doing the work, and the judgment no manual can hand over.
+      </p>
+      <p>
+        For two decades I’ve followed that question around the world, from Nepal to Alaska to the Mariana Islands,
+        studying how apprenticeships, institutions and civilizations pass wisdom from one person to the next, and where
+        that passing breaks.
+      </p>
+      <p>
+        EdTerm is built for the place it breaks: capturing expert reasoning before it’s lost, and putting it where
+        others can use it.
+      </p>
+    </div>
+
+    <p class="pt-6 font-display font-bold text-purple-700">Cameron Covarrubias, Founder</p>
+  </Section>
+
+  <CTA heading="Early Access" buttonLabel="Start a conversation" />
+</BaseLayout>

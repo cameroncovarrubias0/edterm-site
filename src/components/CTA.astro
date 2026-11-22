@@ -1,0 +1,28 @@
+---
+/**
+ * The single closing call to action. Defaults to Early Access.
+ * Button text says what happens (e.g. "Request early access", "Start a conversation").
+ */
+import Button from './Button.astro';
+import { EARLY_ACCESS } from '../site';
+
+interface Props {
+  heading: string;
+  buttonLabel: string;
+  href?: string;
+  tone?: 'paper' | 'white';
+}
+const { heading, buttonLabel, href = EARLY_ACCESS.href, tone = 'paper' } = Astro.props;
+---
+
+<section class:list={['py-section', tone === 'paper' ? 'bg-paper' : 'bg-white']}>
+  <div class="container-site grid-12 items-center gap-y-8" data-reveal>
+    <div class="col-span-12 lg:col-span-7">
+      <h2 class="text-h2 font-bold text-purple-700">{heading}</h2>
+      {Astro.slots.has('default') && <div class="mt-4 max-w-(--container-prose) text-navy"><slot /></div>}
+    </div>
+    <div class="col-span-12 lg:col-span-4 lg:col-start-9 lg:justify-self-end">
+      <Button href={href} variant="secondary" size="lg" class="w-full sm:w-auto">{buttonLabel}</Button>
+    </div>
+  </div>
+</section>

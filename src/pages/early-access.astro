@@ -1,0 +1,155 @@
+---
+// Early Access. Fields and wording carried over from the legacy contact.html, checked against the
+// hard content rules (no research language, no parallel offerings, no superlatives). See CLAUDE.md.
+//
+// The form is a plain HTML POST to Formspree and works with no JavaScript (Formspree then shows its
+// own confirmation page). With JavaScript, the same form submits in place and shows the success
+// panel below, with focus moved to it so screen readers announce it.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { CONTACT_EMAIL, FORMSPREE_ENDPOINT } from '../site';
+
+const field =
+  'mt-2 block w-full min-h-12 rounded-xl border border-ink-muted/40 bg-white px-4 py-3 text-body text-navy placeholder:text-ink-muted/70 transition-colors hover:border-ink-muted focus:border-purple-500 focus:outline-3 focus:outline-offset-2 focus:outline-purple-500';
+const labelCls = 'block text-small font-semibold text-navy';
+const optional = 'font-normal text-ink-muted';
+---
+
+<BaseLayout
+  title="Request Early Access — EdTerm"
+  description="Request early access to EdTerm. Tell us where you fit, or email partners@edterm.com."
+>
+  <Hero label="Early Access" headline="Start a conversation.">
+    <p>
+      We are selectively onboarding founding partners: health systems and universities that understand what gets lost
+      when experienced practitioners leave, and want to be part of closing that gap.
+    </p>
+  </Hero>
+
+  <section class="bg-paper py-section" aria-labelledby="form-heading">
+    <div class="container-site grid-12 gap-y-12">
+      <div class="col-span-12 lg:col-span-4" data-reveal>
+        <h2 id="form-heading" class="text-h2 font-bold text-purple-700">Tell us where you fit.</h2>
+        <p class="mt-6 max-w-(--container-prose)">
+          Every inquiry goes directly to Cameron Covarrubias. We respond to every message personally.
+        </p>
+        <p class="mt-8 text-small text-ink-muted">Prefer email?</p>
+        <p class="mt-1">
+          <a href={`mailto:${CONTACT_EMAIL}`} class="font-semibold text-purple-700 underline underline-offset-4 hover:text-purple-500">
+            {CONTACT_EMAIL}
+          </a>
+        </p>
+      </div>
+
+      <div class="col-span-12 lg:col-span-7 lg:col-start-6">
+        <div class="rounded-card border border-line bg-white p-6 sm:p-10">
+          <form id="access-form" action={FORMSPREE_ENDPOINT} method="POST" class="grid gap-6">
+            <div>
+              <label for="name" class={labelCls}>Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required placeholder="Full name" class={field} />
+            </div>
+            <div>
+              <label for="email" class={labelCls}>Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="your@institution.edu" class={field} />
+            </div>
+            <div>
+              <label for="organization" class={labelCls}>Organization <span class={optional}>(optional)</span></label>
+              <input
+                id="organization"
+                name="organization"
+                type="text"
+                autocomplete="organization"
+                placeholder="Hospital system, university, or institution"
+                class={field}
+              />
+            </div>
+            <div>
+              <label for="role" class={labelCls}>I represent… <span class={optional}>(optional)</span></label>
+              <select id="role" name="role" class:list={[field, 'appearance-auto']}>
+                <option value="" selected>Select your role</option>
+                <option value="health-system">Health system</option>
+                <option value="university">University or academic institution</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class={labelCls}>Tell us about your interest</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                placeholder="What drew you to EdTerm? What are you working on? What kind of collaboration are you imagining?"
+                class:list={[field, 'resize-y']}></textarea>
+            </div>
+
+            <!-- Spam honeypot: hidden from people and assistive tech; Formspree discards submissions that fill it. -->
+            <div class="hidden" aria-hidden="true">
+              <label for="_gotcha">Leave this field empty</label>
+              <input id="_gotcha" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <p id="form-error" class="hidden rounded-xl bg-paper px-4 py-3 text-small text-navy" role="alert">
+              Something went wrong. Please email us directly at
+              <a href={`mailto:${CONTACT_EMAIL}`} class="font-semibold text-purple-700 underline">{CONTACT_EMAIL}</a>.
+            </p>
+
+            <div>
+              <button
+                type="submit"
+                class="inline-flex min-h-14 w-full items-center justify-center rounded-pill bg-navy px-8 font-display text-body font-bold text-white transition-colors hover:bg-purple-900 disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+              >
+                Request Access
+              </button>
+              <p class="mt-3 text-small text-ink-muted">Name, email and message are required.</p>
+            </div>
+          </form>
+
+          <div id="form-success" class="hidden" tabindex="-1">
+            <p class="label text-purple-700">Request sent</p>
+            <h3 class="mt-3 text-h3 font-bold text-navy">Thank you.</h3>
+            <p class="mt-3 max-w-(--container-prose)">
+              We respond to every message personally and will reply to the email address you entered.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Progressive enhancement: submit in place and show the success panel. Without JS the form posts normally.
+  const form = document.getElementById('access-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success');
+  const error = document.getElementById('form-error');
+  if (form && success && error) {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); // only fires once native validation has passed
+      error.classList.add('hidden');
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Sending…';
+      }
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+        success.focus();
+      } catch {
+        error.classList.remove('hidden');
+        if (button) {
+          button.disabled = false;
+          button.textContent = 'Request Access';
+        }
+      }
+    });
+  }
+</script>

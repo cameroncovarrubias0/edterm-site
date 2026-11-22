@@ -1,0 +1,20 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/healthcare", "destination": "/health-systems", "permanent": true },
+    { "source": "/universities", "destination": "/education", "permanent": true },
+    { "source": "/contact", "destination": "/early-access", "permanent": true },
+    { "source": "/about", "destination": "/company", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/pitch",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/pitch.html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
+}
