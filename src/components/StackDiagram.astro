@@ -1,0 +1,37 @@
+---
+/**
+ * The Home centerpiece: three layers of healthcare data, built bottom → top on scroll.
+ * Real text (not an image), so it reads correctly with or without motion and to screen readers.
+ * Layer lines come from the brief.
+ */
+const layers = [
+  { name: 'Reasoning layer', line: 'How experienced clinicians interpret all of it.', step: 2, top: true },
+  { name: 'Genomics', line: "What's possible.", step: 1 },
+  { name: 'EHR & imaging', line: 'What happened.', step: 0 },
+];
+---
+
+<figure data-build class="relative">
+  <ol class="flex flex-col gap-3" aria-label="The healthcare data stack, top to bottom">
+    {
+      layers.map((l) => (
+        <li
+          class:list={[
+            'stack-layer relative rounded-card px-6 py-6 sm:px-8 sm:py-7',
+            l.top ? 'on-dark bg-navy text-white' : 'border border-line bg-white text-navy',
+          ]}
+          style={`--step:${l.step}`}
+        >
+          {l.top && (
+            <span
+              class="stack-glow pointer-events-none absolute inset-0 rounded-card ring-2 ring-gold-500 ring-inset"
+              aria-hidden="true"
+            />
+          )}
+          <p class:list={['label', l.top ? 'text-gold-300' : 'text-purple-700']}>{l.name}</p>
+          <p class:list={['mt-2 font-display font-bold', l.top ? 'text-h3' : 'text-lead']}>{l.line}</p>
+        </li>
+      ))
+    }
+  </ol>
+</figure>

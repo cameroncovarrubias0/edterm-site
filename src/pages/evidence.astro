@@ -1,0 +1,30 @@
+---
+// Evidence: the only page where research language is allowed. Owner-supplied wording, verbatim.
+// Peer review passed — never "validated", "proven" or "pilot-validated". No study results or findings.
+// Section ids are linked from the Home proof cards; keep them stable.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout
+  title="Evidence — EdTerm"
+  description="Peer-reviewed methodology, an IRB-approved study through Lindenwood University, and a presentation at the Asian Conference on Education."
+>
+  <Hero label="Evidence" headline="Peer review, an open study and a conference presentation." />
+
+  <Section tone="white" heading="Peer-reviewed methodology" id="peer-review">
+    <p>Double-blind peer review through IAFOR.</p>
+  </Section>
+
+  <Section tone="paper" heading="IRB-approved study" id="lindenwood-study">
+    <p>An IRB-approved study through Lindenwood University, now open for participants.</p>
+  </Section>
+
+  <Section tone="white" heading="18th Annual Asian Conference on Education (ACE2026), Tokyo, 2026" id="ace2026">
+    <p>Presented the Wisdom Journalism methodology as curriculum design.</p>
+  </Section>
+
+  <CTA heading="Early Access" buttonLabel="Start a conversation" />
+</BaseLayout>

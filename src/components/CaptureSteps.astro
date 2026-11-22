@@ -1,0 +1,47 @@
+---
+/**
+ * How reasoning is captured: Wisdom Journalism → Wisdom Nodes → Human Wisdom Database.
+ * A connected row (left → right on desktop, top → bottom on mobile), one owner-approved line each.
+ * Names and these lines only: no protocol, node structure, field details or counts.
+ * Used on /health-systems and /reasoning-layer.
+ */
+interface Props {
+  /** Background the steps sit on, so the ring markers match it. */
+  tone?: 'white' | 'paper';
+  class?: string;
+}
+const { tone = 'white', class: className } = Astro.props;
+
+const capture = [
+  { name: 'Wisdom Journalism', line: 'A peer-reviewed method for capturing how an experienced clinician reasons.' },
+  { name: 'Wisdom Nodes', line: 'Each clinician’s reasoning, structured as one searchable record.' },
+  { name: 'Human Wisdom Database', line: 'The growing archive those records build.' },
+];
+---
+
+<ol class:list={['grid md:grid-cols-3 md:gap-x-(--spacing-gutter)', className]} aria-label="How reasoning is captured">
+  {
+    capture.map((step, i) => (
+      <li
+        class:list={[
+          'relative pb-10 pl-10 last:pb-0 md:pb-0 md:pl-0 md:pt-12',
+          // connector to the next step's node
+          "after:absolute after:bg-purple-700/30 after:content-[''] last:after:hidden",
+          'after:bottom-[-1px] after:left-[7px] after:top-[17px] after:w-0.5',
+          'md:after:bottom-auto md:after:left-4 md:after:right-[calc(-1*var(--spacing-gutter))] md:after:top-[7px] md:after:h-0.5 md:after:w-auto',
+        ]}
+      >
+        <span
+          class:list={[
+            'absolute left-0 top-px size-4 rounded-full border-2 border-purple-700 md:top-0',
+            tone === 'paper' ? 'bg-paper' : 'bg-white',
+          ]}
+          aria-hidden="true"
+        />
+        <span class="label block text-purple-700">{i + 1}</span>
+        <h3 class="mt-2 text-h3 font-bold text-navy">{step.name}</h3>
+        <p class="mt-3 max-w-[34ch] text-ink-muted">{step.line}</p>
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,54 @@
+---
+/**
+ * One of the two equal-weight Home sections (the data layer, the education loop),
+ * joined by a single gold line running down the left. The line passes through
+ * every LoopBlock in sequence; each heading gets a branch off it.
+ * - position "first": line starts at the block's top edge.
+ * - position "last": line ends at a ring beside the `close` slot.
+ */
+interface Props {
+  heading: string;
+  tone?: 'white' | 'paper';
+  position?: 'first' | 'middle' | 'last';
+  id?: string;
+}
+const { heading, tone = 'white', position = 'middle', id } = Astro.props;
+const isLast = position === 'last';
+---
+
+<section id={id} class:list={['py-section', tone === 'paper' ? 'bg-paper' : 'bg-white']} data-build>
+  <div class="container-site flex gap-4 lg:gap-8">
+    <!-- Track: holds the spine and the branch into this section's heading. -->
+    <div class="relative w-4 shrink-0 text-h2 lg:w-10" aria-hidden="true">
+      <span
+        class:list={[
+          'loop-spine absolute left-[7px] w-0.5 bg-gold-500',
+          'top-[calc(-1*var(--spacing-section))]',
+          isLast ? 'bottom-[0.9rem]' : 'bottom-[calc(-1*var(--spacing-section))]',
+        ]}
+      ></span>
+      <span
+        class="loop-branch absolute left-[7px] top-[calc(0.56em-1.25rem)] h-5 w-[calc(100%-7px+0.75rem)] rounded-bl-[1.25rem] border-b-2 border-l-2 border-gold-500 lg:w-[calc(100%-7px+1.5rem)]"
+      ></span>
+      {
+        isLast && (
+          <span class="loop-node absolute bottom-[calc(0.9rem-7px)] left-0 size-4 rounded-full border-2 border-gold-500 bg-white" />
+        )
+      }
+    </div>
+
+    <div class="grid min-w-0 flex-1 gap-y-5 lg:grid-cols-11 lg:gap-x-(--spacing-gutter)">
+      <h2 class="text-h2 font-bold text-purple-700 lg:col-span-4">{heading}</h2>
+      <div class="max-w-(--container-prose) space-y-4 lg:col-span-6 lg:col-start-6 lg:pt-2">
+        <slot />
+      </div>
+      {
+        isLast && Astro.slots.has('close') && (
+          <p class="mt-6 font-display text-lead font-bold text-navy lg:col-span-11 lg:mt-10">
+            <slot name="close" />
+          </p>
+        )
+      }
+    </div>
+  </div>
+</section>

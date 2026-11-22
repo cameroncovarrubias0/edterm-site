@@ -1,0 +1,17 @@
+---
+/**
+ * The site's one recurring motif: three thin stacked bands echoing the data stack
+ * (EHR/imaging → genomics → reasoning layer, with the top band in gold).
+ * Purely decorative; used as a divider under the hero, at section breaks and in the footer.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<div class:list={['flex flex-col gap-[3px]', className]} aria-hidden="true">
+  <span class="block h-[3px] w-24 rounded-pill bg-gold-500"></span>
+  <span class="block h-[3px] w-16 rounded-pill bg-current opacity-40"></span>
+  <span class="block h-[3px] w-10 rounded-pill bg-current opacity-20"></span>
+</div>

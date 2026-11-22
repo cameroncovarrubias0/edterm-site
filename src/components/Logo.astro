@@ -1,0 +1,28 @@
+---
+/**
+ * The supplied EdTerm Inc. logo with a transparent background (public/edterm-logo.png, 360×96, 2× of the
+ * largest display size). White was removed only from the outer background and the wordmark's letter
+ * counters; white inside the mark (book pages, inner disc) is kept. The wordmark is navy, so use it on
+ * white or paper backgrounds.
+ */
+interface Props {
+  /** Rendered height in px; width follows the aspect ratio. */
+  height?: number;
+  /** Height classes for responsive sizing, e.g. "h-8 sm:h-10". Without them the logo renders at `height`. */
+  class?: string;
+}
+const SRC = { url: '/edterm-logo.png', width: 360, height: 96 };
+const { height = 40, class: className } = Astro.props;
+const width = Math.round((SRC.width / SRC.height) * height);
+const style = className ? undefined : `height:${height}px`;
+---
+
+<img
+  src={SRC.url}
+  alt="EdTerm Inc. Human Wisdom Database"
+  width={width}
+  height={height}
+  decoding="async"
+  class:list={['block w-auto', className]}
+  style={style}
+/>

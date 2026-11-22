@@ -1,0 +1,42 @@
+---
+/**
+ * Credibility item: a rounded card with a short line and a round arrow button.
+ * The whole card is the link (large tap target). Used for peer review, the
+ * Lindenwood IRB-approved study and ACE2026. No claims beyond what the brief states.
+ */
+interface Props {
+  title: string;
+  href: string;
+  /** Optional short supporting line. */
+  text?: string;
+  tone?: 'dark' | 'light';
+}
+const { title, href, text, tone = 'dark' } = Astro.props;
+const dark = tone === 'dark';
+---
+
+<a
+  href={href}
+  class:list={[
+    'group flex h-full min-h-40 flex-col justify-between gap-8 rounded-card border p-6 transition-colors duration-200 sm:p-7',
+    dark
+      ? 'border-white/12 bg-white/[0.04] text-white hover:border-gold-500/70 hover:bg-white/[0.07]'
+      : 'border-line bg-white text-navy hover:border-purple-500/50',
+  ]}
+>
+  <div>
+    <p class="font-display text-h3 font-bold">{title}</p>
+    {text && <p class:list={['mt-3 text-small', dark ? 'text-white/75' : 'text-ink-muted']}>{text}</p>}
+  </div>
+  <span
+    class:list={[
+      'inline-flex size-11 items-center justify-center self-end rounded-pill border transition-transform duration-200 group-hover:translate-x-1 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0',
+      dark ? 'border-gold-500 text-gold-300' : 'border-purple-700 text-purple-700',
+    ]}
+    aria-hidden="true"
+  >
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9h12M10 4l5 5-5 5" />
+    </svg>
+  </span>
+</a>

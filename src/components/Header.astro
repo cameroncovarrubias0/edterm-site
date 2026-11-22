@@ -1,0 +1,126 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+import { NAV, EARLY_ACCESS, CONTACT_EMAIL } from '../site';
+
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => path === href;
+---
+
+<!-- Utility bar: scrolls away; the main header below stays sticky. -->
+<div class="bg-navy text-white/80 on-dark">
+  <div class="container-site flex h-9 items-center justify-between text-small">
+    <a href={`mailto:${CONTACT_EMAIL}`} class="hover:text-gold-300">{CONTACT_EMAIL}</a>
+    <a
+      href="/evidence"
+      class="hidden hover:text-gold-300 sm:inline"
+      aria-current={isCurrent('/evidence') ? 'page' : undefined}>Evidence</a
+    >
+  </div>
+</div>
+
+<header class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+  <div class="container-site flex h-[4.5rem] items-center justify-between gap-3 sm:gap-6">
+    <a href="/" class="shrink-0" aria-label="EdTerm home">
+      <Logo height={40} class="h-8 sm:h-10" />
+    </a>
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-1">
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isCurrent(item.href) ? 'page' : undefined}
+                class="relative inline-flex min-h-11 items-center px-3 text-small font-medium text-navy hover:text-purple-700 aria-[current=page]:text-purple-700 aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-1.5 aria-[current=page]:after:h-0.5 aria-[current=page]:after:bg-gold-500"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <Button href={EARLY_ACCESS.href} size="compact" aria-current={isCurrent(EARLY_ACCESS.href) ? 'page' : undefined}>
+        {EARLY_ACCESS.label}
+      </Button>
+      <button
+        type="button"
+        class="inline-flex size-11 items-center justify-center rounded-pill text-navy hover:bg-paper lg:hidden"
+        aria-controls="mobile-menu"
+        aria-expanded="false"
+        data-menu-toggle
+      >
+        <span class="sr-only" data-menu-label>Open menu</span>
+        <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path data-menu-icon="open" d="M3 6h16M3 11h16M3 16h16" />
+          <path data-menu-icon="close" d="M5 5l12 12M17 5L5 17" class="hidden" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu: full-screen list under the header; every page is one tap away. -->
+  <nav
+    id="mobile-menu"
+    aria-label="Main"
+    class="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-white lg:hidden"
+    hidden
+  >
+    <ul class="container-site flex flex-col py-6">
+      {
+        NAV.map((item) => (
+          <li class="border-b border-line">
+            <a
+              href={item.href}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+              class="flex min-h-16 items-center font-display text-h3 font-bold text-navy aria-[current=page]:text-purple-700"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="pt-8">
+        <Button href={EARLY_ACCESS.href} size="lg" class="w-full">{EARLY_ACCESS.label}</Button>
+      </li>
+      <li class="pt-6 text-small text-ink-muted">
+        <a href={`mailto:${CONTACT_EMAIL}`} class="inline-flex min-h-11 items-center hover:text-purple-700">{CONTACT_EMAIL}</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.getElementById('mobile-menu');
+  if (toggle && menu) {
+    const label = toggle.querySelector('[data-menu-label]');
+    const iconOpen = toggle.querySelector('[data-menu-icon="open"]');
+    const iconClose = toggle.querySelector('[data-menu-icon="close"]');
+
+    const setOpen = (open: boolean) => {
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      if (label) label.textContent = open ? 'Close menu' : 'Open menu';
+      iconOpen?.classList.toggle('hidden', open);
+      iconClose?.classList.toggle('hidden', !open);
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+    };
+
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+    // Close if the viewport grows past the mobile breakpoint while open.
+    matchMedia('(min-width: 1024px)').addEventListener('change', (e) => {
+      if (e.matches) setOpen(false);
+    });
+  }
+</script>
