@@ -74,6 +74,28 @@
   }
 }
 
+/* Phone type scale (below 640px only). Overrides the tokens above so every page follows;
+   from 640px up the @theme values apply unchanged. Labels and small text are not changed,
+   so tap targets and contrast stay the same. Aim: hero headlines wrap to about four lines at 360px. */
+@media (max-width: 639.98px) {
+  :root {
+    --text-display: clamp(1.625rem, 0.9rem + 3.2vw, 2.25rem); /* 26px at 360 */
+    --text-display--line-height: 1.1;
+    --text-display--letter-spacing: -0.02em;
+    --text-h1: clamp(1.5rem, 0.9rem + 2.6vw, 2.125rem); /* 24px at 360 */
+    --text-h1--line-height: 1.12;
+    --text-h2: clamp(1.375rem, 1rem + 1.6vw, 1.75rem); /* 22px at 360 */
+    --text-h2--line-height: 1.18;
+    --text-h3: clamp(1.125rem, 1rem + 0.5vw, 1.25rem); /* 18px at 360 */
+    --text-h3--line-height: 1.3;
+    --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.125rem); /* 17px at 360 */
+    --text-lead--line-height: 1.55;
+    --text-body: 1rem; /* 16px */
+    --text-body--line-height: 1.6;
+    --text-quote: clamp(1.375rem, 1rem + 1.6vw, 1.75rem); /* 22px at 360 */
+  }
+}
+
 /* ───────────────────────── Base ───────────────────────── */
 @layer base {
   html {
