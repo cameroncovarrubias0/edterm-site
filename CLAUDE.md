@@ -35,11 +35,11 @@ The full brief lives outside the repo at `../EdTerm-Site/EdTerm_Site_Brief.md` (
 
 ## The pitch page rule
 
-- `pitch.html` (investor brief) stays in the repo. Do not delete it.
-- In the Astro build it is copied unchanged into `public/` so it serves at `/pitch`. The only permitted edit is adding `<meta name="robots" content="noindex, nofollow">`.
-- Never link to it from anywhere: no nav, footer, sitemap, buttons or other pages. Exclude it from any generated sitemap.
-- `vercel.json` sends `X-Robots-Tag: noindex, nofollow` for `/pitch` (and `/pitch.html`) only.
-- At launch, when noindex is removed from the rest of the site, `/pitch` stays noindexed.
+- `/pitch` (the investor brief) is built as an Astro page in the site's design system: `src/pages/pitch.astro`, using `BaseLayout` with `bare` (own sticky deck bar instead of the site header/footer) and `DeckSlide` for each slide.
+- Its slide text, numbers and sources are the owner's and are kept as written. Change them only when the owner asks. The investor brief is the one place where pricing, raise and investor details appear; the hard content rules below apply to every other page.
+- It must stay noindexed: `BaseLayout` gets `noindex` (meta tag), and `vercel.json` sends `X-Robots-Tag: noindex, nofollow` for `/pitch` and `/pitch.html`. This holds regardless of the site-wide `NOINDEX` setting.
+- Never link to it from anywhere: no nav, footer, sitemap, buttons or other pages. The sitemap filter in `astro.config.mjs` excludes it.
+- The legacy root `pitch.html` is the pre-redesign version, kept for reference; it is not part of the build.
 
 ## Hard content rules (apply to every page and every commit)
 

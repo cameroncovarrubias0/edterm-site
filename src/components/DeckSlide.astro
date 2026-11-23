@@ -1,0 +1,44 @@
+---
+/**
+ * One slide of the /pitch deck as a full-width section: slide number + eyebrow label, heading, content.
+ * Headings are purple-700 on light tones and gold-300 on deep (site contrast rule).
+ */
+interface Props {
+  n: number;
+  total: number;
+  /** The slide's eyebrow, e.g. "The Problem". Also shown in the sticky deck bar. */
+  eyebrow: string;
+  heading: string;
+  tone?: 'white' | 'paper' | 'deep';
+}
+const { n, total, eyebrow, heading, tone = 'white' } = Astro.props;
+const dark = tone === 'deep';
+const pad = (x: number) => String(x).padStart(2, '0');
+const toneClass = { white: 'bg-white text-navy', paper: 'bg-paper text-navy', deep: 'on-dark bg-deep text-white/80' }[tone];
+---
+
+<section
+  id={`slide-${n}`}
+  data-slide={n}
+  data-title={eyebrow}
+  class:list={['py-section', toneClass]}
+  aria-labelledby={`slide-${n}-heading`}
+>
+  <div class="container-site">
+    <div data-reveal>
+      <p class:list={['label flex flex-wrap gap-x-4 gap-y-1', dark ? 'text-gold-300' : 'text-purple-700']}>
+        <span class:list={[dark ? 'text-white/50' : 'text-ink-muted']}>{pad(n)} / {pad(total)}</span>
+        <span>{eyebrow}</span>
+      </p>
+      <h2
+        id={`slide-${n}-heading`}
+        class:list={['mt-5 max-w-[24ch] text-h1 font-extrabold', dark ? 'text-gold-300' : 'text-purple-700']}
+      >
+        {heading}
+      </h2>
+    </div>
+    <div class="mt-12 sm:mt-16">
+      <slot />
+    </div>
+  </div>
+</section>

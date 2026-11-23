@@ -1,0 +1,387 @@
+---
+// /pitch: the investor brief, rebuilt in the site's design system.
+// Slide text is carried over from the previous public/pitch.html (same 9 slides, numbers and sources),
+// with owner-approved edits: peer-reviewed (not "validated"), no node field structure, no individual names,
+// softened superlatives, healthcare-only vision. Do not edit claims here without the owner.
+//
+// Rules (see CLAUDE.md): never linked from any page, nav, footer, sitemap or button; always noindex
+// (meta tag via `noindex` below + X-Robots-Tag header in vercel.json); excluded from the sitemap.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DeckSlide from '../components/DeckSlide.astro';
+import Logo from '../components/Logo.astro';
+import Button from '../components/Button.astro';
+
+const TOTAL = 9;
+
+const workflow = [
+  { verb: 'Identify', rest: 'retiring clinical staff with irreplaceable judgment' },
+  { verb: 'Interview', rest: 'using peer-reviewed Wisdom Journalism methodology' },
+  { verb: 'Structure', rest: 'into Wisdom Nodes' },
+  { verb: 'Surface', rest: 'via Tero — matched to the situation, not just a keyword search' },
+];
+
+const funds = [
+  { label: 'Technical development', pct: 35 },
+  { label: 'University pilot programs', pct: 20 },
+  { label: 'Global research presence', pct: 15 },
+  { label: 'Legal and data systems', pct: 15 },
+  { label: 'Operations & salary', pct: 15 },
+];
+
+const milestones = [
+  '1,000 Wisdom Nodes collected across healthcare pilot',
+  'ACE2026 Tokyo oral presentation — November 2026',
+  '4 university partnerships active and collecting',
+  'First enterprise B2B engagement closed',
+  'Tero v1 beta live — AI retrieval layer operational',
+  'Technical co-founder hired',
+  '18 months runway to Series A positioning',
+];
+
+const card = 'rounded-card border p-6 sm:p-8';
+const cardLight = `${card} border-line bg-white`;
+const cardDark = `${card} border-white/12 bg-white/[0.04]`;
+const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
+---
+
+<BaseLayout
+  title="EdTerm — Investor Brief"
+  description="EdTerm investor brief."
+  noindex
+  bare
+>
+  <!-- Sticky deck bar: logo, current slide label, progress. Works as a static label without JS. -->
+  <div slot="bar" class="sticky top-0 z-50 border-b border-line bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
+    <div class="container-site flex h-16 items-center justify-between gap-4">
+      <a href="/" class="shrink-0" aria-label="EdTerm home"><Logo height={40} class="h-7 sm:h-9" /></a>
+      <p class="label truncate text-purple-700">
+        <span class="text-ink-muted" data-deck-num>01 / 09</span>
+        <span class="ml-3" data-deck-title>Investor Brief · 2026</span>
+      </p>
+      <a href="mailto:partners@edterm.com" class="hidden text-small font-semibold text-navy hover:text-purple-700 md:inline">partners@edterm.com</a>
+    </div>
+    <div class="h-0.5 bg-line" aria-hidden="true">
+      <div class="h-full bg-gold-500 transition-[width] duration-300 motion-reduce:transition-none" style={`width:${100 / TOTAL}%`} data-deck-progress></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: COVER (full hero, as on Home) -->
+  <section
+    id="slide-1"
+    data-slide="1"
+    data-title="Investor Brief · 2026"
+    class="on-dark relative overflow-hidden rounded-b-hero bg-[linear-gradient(135deg,var(--color-navy)_0%,var(--color-navy)_35%,var(--color-purple-900)_75%,var(--color-purple-700)_100%)] text-white"
+    aria-labelledby="slide-1-heading"
+  >
+    <div class="container-site grid-12 gap-y-14 pb-20 pt-16 sm:pb-28 sm:pt-24 lg:pb-32 lg:pt-28">
+      <div class="col-span-12 lg:col-span-7" data-reveal>
+        <p class="label text-gold-300">Investor Brief · 2026</p>
+        <h1 id="slide-1-heading" class="mt-6 text-display font-extrabold">The wisdom that walks out the door every day.</h1>
+        <p class="mt-8 max-w-(--container-lead) text-lead text-white/85">
+          EdTerm captures how experienced professionals actually decide under pressure — before they retire and that
+          knowledge disappears permanently.
+        </p>
+        <p class="mt-8 text-small text-white/70">Cameron Covarrubias · Founder &nbsp;·&nbsp; partners@edterm.com</p>
+      </div>
+      <div class="col-span-12 flex flex-col gap-8 lg:col-span-4 lg:col-start-9 lg:self-end" data-reveal>
+        <figure>
+          <blockquote class="font-quote text-h3 italic leading-snug text-white">
+            <p>"You can read something in a book or you can do it for 30 years. They're not the same."</p>
+          </blockquote>
+          <figcaption class="label mt-4 text-white/60">— The EdTerm Thesis</figcaption>
+        </figure>
+        <div class="rounded-card border border-white/15 bg-white/[0.05] p-6">
+          <p class="label text-gold-300">Raising</p>
+          <p class="mt-2 font-display text-h1 font-extrabold text-white">$1,000,000</p>
+          <p class="mt-2 text-small text-white/75">SAFE · $10M Pre-Money Cap · Minimum Check $25K</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: PROBLEM -->
+  <DeckSlide n={2} total={TOTAL} eyebrow="The Problem" heading="Every retirement is a permanent knowledge erasure." tone="white">
+    <div class="grid-12 gap-y-12">
+      <dl class="col-span-12 grid gap-8 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1" data-reveal>
+        <div>
+          <dt class="sr-only">$5.19M</dt>
+          <dd>
+            <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-purple-700" aria-hidden="true">$5.19M</p>
+            <p class="mt-3 text-ink-muted">Lost annually per hospital system to RN turnover alone</p>
+          </dd>
+        </div>
+        <div>
+          <dt class="sr-only">40%</dt>
+          <dd>
+            <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-purple-700" aria-hidden="true">40%</p>
+            <p class="mt-3 text-ink-muted">Of nurses plan to retire or leave within five years</p>
+          </dd>
+        </div>
+        <div>
+          <dt class="sr-only">1M+</dt>
+          <dd>
+            <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-purple-700" aria-hidden="true">1M+</p>
+            <p class="mt-3 text-ink-muted">RNs projected to exit the workforce by end of the decade</p>
+          </dd>
+        </div>
+      </dl>
+      <div class="col-span-12 max-w-(--container-prose) space-y-4 lg:col-span-6 lg:col-start-7" data-reveal>
+        <p>Every knowledge management system captures what was written down. Nothing captures how experienced people actually made decisions under pressure.</p>
+        <p>Training programs transfer information. Nothing transfers wisdom. When a 32-year ED nurse retires, the judgment she built across thousands of edge cases — the patterns she learned to read before the vitals confirmed them — leaves with her. Permanently.</p>
+        <p>This is not a documentation problem. It is a methodology problem. No existing tool was designed to capture what experienced clinicians actually know.</p>
+        <p class="!mt-8 border-l-2 border-gold-500 pl-5 font-display text-lead font-bold text-navy">Existing tools weren't built for this. The category is still forming.</p>
+      </div>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 3: SOLUTION -->
+  <DeckSlide n={3} total={TOTAL} eyebrow="The Solution" heading="Structured interviews. Permanent, searchable wisdom." tone="deep">
+    <div class="grid-12 gap-y-12">
+      <div class="col-span-12 lg:col-span-6" data-reveal>
+        <div class="max-w-(--container-prose) space-y-4">
+          <p>EdTerm conducts structured interviews with retiring professionals using Wisdom Journalism — a peer-reviewed methodology — and transforms their judgment into Wisdom Nodes: structured knowledge artifacts.</p>
+          <p>Tero is designed to surface the right node to the right person at the right moment. A second-year ICU nurse would describe what she is seeing, and Tero would match her to the nodes of nurses who navigated the same threshold.</p>
+        </div>
+        <!-- Connected sequence, same pattern as the site's capture steps -->
+        <ol class="mt-10">
+          {
+            workflow.map((s, i) => (
+              <li class="relative pb-7 pl-10 last:pb-0 after:absolute after:bottom-[-1px] after:left-[7px] after:top-[17px] after:w-0.5 after:bg-gold-500/40 after:content-[''] last:after:hidden">
+                <span class="absolute left-0 top-px size-4 rounded-full border-2 border-gold-500 bg-deep" aria-hidden="true" />
+                <span class="label block text-gold-300">{String(i + 1).padStart(2, '0')}</span>
+                <p class="mt-1"><strong class="font-semibold text-white">{s.verb}</strong> {s.rest}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:col-start-8" data-reveal>
+        <article class={cardDark}>
+          <header class="border-b border-white/12 pb-5">
+            <p class="label text-gold-300">Node #004831</p>
+            <p class="mt-2 text-small text-white/70">Senior Emergency Department Nurse · 32 Years Clinical Experience</p>
+          </header>
+          <!-- Excerpt only: node field names/structure intentionally not shown. -->
+          <div class="mt-6 space-y-5">
+            <p class="italic text-white/85">"Sometimes the patient who looks the calmest is the one I'm most worried about. When a normally anxious patient suddenly becomes unusually quiet and their family starts answering questions for them — I stop. More than once those patients deteriorated within the hour."</p>
+            <p class="text-white/85">Has behavior changed unexpectedly? Is the family behaving differently? Does clinical intuition conflict with the vitals? If several indicators present — escalate. Even if metrics haven't crossed intervention thresholds.</p>
+            <p class="border-l-2 border-gold-500 pl-4 font-display font-bold text-white">Experienced clinicians don't ignore the data — they recognize when the data hasn't caught up to reality.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 4: TRACTION -->
+  <DeckSlide n={4} total={TOTAL} eyebrow="Traction" heading="10 months. Pre-revenue. Real proof." tone="paper">
+    <div class="grid gap-4 md:grid-cols-2">
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">Peer Review</p>
+        <h3 class="mt-3 text-h3 font-bold">Double-Blind Peer Review Passed</h3>
+        <p class="mt-3 text-ink-muted">Wisdom Journalism framework accepted by the International Academic Forum. Confirmed oral presenter at ACE2026 — Asian Conference on Education, Tokyo, November 2026.</p>
+      </article>
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">IRB &amp; Research</p>
+        <h3 class="mt-3 text-h3 font-bold">IRB Approved — Lindenwood University</h3>
+        <p class="mt-3 text-ink-muted">CITI human subjects training completed. MOU in process.</p>
+      </article>
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">First Artifact</p>
+        <h3 class="mt-3 text-h3 font-bold">Node #004831 Produced</h3>
+        <p class="mt-3 text-ink-muted">Senior ED Nurse, 32 years. Reviewed by senior nursing educators. The methodology works in practice, not just theory.</p>
+      </article>
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">Momentum</p>
+        <h3 class="mt-3 text-h3 font-bold">YC Application Submitted</h3>
+        <ul class="mt-3 space-y-2 text-ink-muted">
+          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>YC application submitted — August 2026 batch</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Global fieldwork completed — Thailand, Qatar Q1 2026</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Active outreach to healthcare systems and university partners</span></li>
+        </ul>
+      </article>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 5: MARKET -->
+  <DeckSlide n={5} total={TOTAL} eyebrow="The Market" heading="A category still taking shape." tone="deep">
+    <div class="grid-12 gap-y-12">
+      <div class="col-span-12 space-y-10 lg:col-span-6" data-reveal>
+        <div>
+          <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-gold-300">$62.2B</p>
+          <p class="mt-3 max-w-(--container-prose)">Total Addressable Market — Global knowledge management software market by 2033, growing at 13.6% CAGR. Source: <a href="https://www.grandviewresearch.com/industry-analysis/knowledge-management-software-market-report" target="_blank" rel="noopener" class="text-gold-300 underline underline-offset-4 hover:text-white">Grand View Research</a></p>
+        </div>
+        <div>
+          <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-gold-300">$9.9B</p>
+          <p class="mt-3 max-w-(--container-prose)">Serviceable Addressable Market — Healthcare knowledge management market by 2030, growing at 14.4% CAGR. Source: <a href="https://www.meticulousresearch.com/product/healthcare-knowledge-management-market-6700/toc" target="_blank" rel="noopener" class="text-gold-300 underline underline-offset-4 hover:text-white">Meticulous Research</a></p>
+        </div>
+        <div>
+          <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-gold-300">$37.5M</p>
+          <p class="mt-3 max-w-(--container-prose)">Serviceable Obtainable Market — ARR at Year 5: 100 hospital systems × 5 departments × $75K average contract</p>
+        </div>
+        <p class="max-w-(--container-prose) text-small text-white/60">Few tools focus on retirement knowledge retention. The category is still forming.</p>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:col-start-8" data-reveal>
+        <div class={cardDark}>
+          <h3 class="text-h3 font-bold text-white">Why Now</h3>
+          <ul class="mt-6 space-y-4">
+            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>The nursing retirement wave is happening right now — not in five years. All Baby Boomers reach retirement age before 2030.</p></li>
+            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>LLMs can now structure messy human knowledge at scale — this was technically impossible three years ago.</p></li>
+            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>A peer-reviewed methodology gives enterprise buyers a credible basis for adoption. We have it in place.</p></li>
+            <li class="flex gap-3 border-t border-white/12 pt-4"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><p class="text-white/85"><strong class="text-white">The moat:</strong> The data does not exist yet. You cannot train an AI on wisdom that was never collected. 50,000 nodes is worth exponentially more than 500 — patterns emerge at scale that no individual expert could articulate.</p></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 6: BUSINESS MODEL -->
+  <DeckSlide n={6} total={TOTAL} eyebrow="Business Model" heading="Three phases. Each one compounds." tone="white">
+    <div class="grid gap-4 md:grid-cols-3">
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">Phase 1 · Year 1–2</p>
+        <h3 class="mt-3 text-h3 font-bold">Enterprise Engagement</h3>
+        <p class="mt-3 font-display font-bold text-purple-700">$35,000 – $75,000 per engagement</p>
+        <p class="mt-3 text-ink-muted">Deploy trained interviewers with retiring employees. Deliver structured Wisdom Node archive. Annual recurring contracts for ongoing collection.</p>
+      </article>
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">Phase 2 · Year 2+</p>
+        <h3 class="mt-3 text-h3 font-bold">University Licensing</h3>
+        <p class="mt-3 font-display font-bold text-purple-700">$15,000 – $30,000 per institution annually</p>
+        <p class="mt-3 text-ink-muted">License Wisdom Journalism curriculum to journalism programs. Students collect nodes. University pays licensing fee. Collection scales globally without adding headcount.</p>
+      </article>
+      <article class={cardLight} data-reveal>
+        <p class="label text-purple-700">Phase 3 · Year 3+</p>
+        <h3 class="mt-3 text-h3 font-bold">HWD &amp; Tero SaaS</h3>
+        <p class="mt-3 font-display font-bold text-purple-700">Annual license · Dataset licensing to AI companies</p>
+        <p class="mt-3 text-ink-muted">Access the node archive as it grows. Dataset licensing for AI training data. This is where the real scale lives. The database compounds every year.</p>
+      </article>
+    </div>
+    <div class="mt-6 rounded-card bg-paper p-6 sm:p-8" data-reveal>
+      <h3 class="text-h3 font-bold text-purple-700">The Compounding Moat</h3>
+      <p class="mt-3 max-w-(--container-prose)">The peer-reviewed collection methodology, IRB-governed governance, and global university network take years to build — not a feature a competitor can ship in a quarter. Every node collected makes the next node more valuable. The data compounds. The moat widens with every engagement.</p>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 7: TEAM -->
+  <DeckSlide n={7} total={TOTAL} eyebrow="The Team" heading="Built by someone who studied wisdom transfer for twenty years." tone="deep">
+    <div class="grid gap-4 md:grid-cols-2">
+      <article class={cardDark} data-reveal>
+        <h3 class="text-h3 font-bold text-white">Cameron Covarrubias</h3>
+        <p class="label mt-2 text-gold-300">Founder &amp; CEO</p>
+        <p class="mt-4">Spent career studying how knowledge moves between people across industries and cultures. Built EdTerm from zero in 10 months to peer-reviewed framework, international conference, and active university research partnership.</p>
+        <ul class="mt-5 space-y-2">
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Wisdom Journalism peer review passed — IAFOR</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>ACE2026 Tokyo — confirmed oral presenter</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>20 years inside ancient and modern knowledge transfer systems</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Global fieldwork: Mariana Islands, Alaska, Nepal, Thailand, Qatar</span></li>
+        </ul>
+      </article>
+      <article class={cardDark} data-reveal>
+        <h3 class="text-h3 font-bold text-white">Lindenwood University</h3>
+        <p class="label mt-2 text-gold-300">Academic Partner</p>
+        <p class="mt-4">An IRB-approved study through Lindenwood University.</p>
+        <ul class="mt-5 space-y-2">
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Lindenwood University institutional backing</span></li>
+        </ul>
+      </article>
+    </div>
+    <div class="mt-12" data-reveal>
+      <h3 class="text-h3 font-bold text-white">Key Hire This Round</h3>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <div class="rounded-card border border-white/12 p-5">
+          <p class="font-display font-bold text-white">Technical Co-Founder</p>
+          <p class="mt-2 text-small text-white/70">Primary hire this raise funds · Knowledge graph or NLP background · Search active</p>
+        </div>
+        <div class="rounded-card border border-white/12 p-5">
+          <p class="font-display font-bold text-white">Healthcare System Partner</p>
+          <p class="mt-2 text-small text-white/70">Founding health-system partner · CNO or VP Workforce Development · Active outreach underway</p>
+        </div>
+        <div class="rounded-card border border-white/12 p-5">
+          <p class="font-display font-bold text-white">University Partners</p>
+          <p class="mt-2 text-small text-white/70">3 additional journalism or communications programs · Global network in development</p>
+        </div>
+      </div>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 8: THE ASK -->
+  <DeckSlide n={8} total={TOTAL} eyebrow="The Ask" heading="$1M to build the Human Wisdom Database." tone="paper">
+    <div class="grid-12 gap-y-12">
+      <div class="col-span-12 lg:col-span-6" data-reveal>
+        <p class="text-lead">Raising $1,000,000 on a SAFE. Pre-money cap $10M. Minimum check $25,000.</p>
+        <h3 class="label mt-10 text-ink-muted">Use of Funds</h3>
+        <ul class="mt-5 space-y-4">
+          {
+            funds.map((f) => (
+              <li class="grid grid-cols-[minmax(0,10rem)_1fr_3rem] items-center gap-4 max-sm:grid-cols-[1fr_3rem]">
+                <span class="text-small">{f.label}</span>
+                <span class="h-2 rounded-pill bg-line max-sm:col-span-2 max-sm:row-start-2" aria-hidden="true">
+                  <span class="block h-full rounded-pill bg-purple-700" style={`width:${f.pct}%`} />
+                </span>
+                <span class="text-right font-mono text-small text-purple-700 max-sm:row-start-1 max-sm:col-start-2">{f.pct}%</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-10 rounded-card bg-white p-6">
+          <p class="label text-ink-muted">Three Ways to Participate</p>
+          <p class="mt-3 text-small"><strong>Angels &amp; early investors</strong> — Wire or SAFE commitment, minimum $25K</p>
+          <p class="mt-2 text-small"><strong>Accelerators</strong> — Apply and participate in the cohort</p>
+          <p class="mt-2 text-small"><strong>Strategic partners</strong> — Introduction to a CNO, VP Workforce Development, or technical co-founder candidate</p>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:col-start-8" data-reveal>
+        <div class={cardLight}>
+          <h3 class="text-h3 font-bold text-purple-700">What This Round Unlocks</h3>
+          <ul class="mt-6 space-y-3">
+            {milestones.map((m) => (
+              <li class="flex gap-3"><span class:list={[dot, 'bg-gold-500']} aria-hidden="true" /><p>{m}</p></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </DeckSlide>
+
+  <!-- SLIDE 9: VISION -->
+  <DeckSlide n={9} total={TOTAL} eyebrow="The Vision" heading="In three years, a second-year nurse knows what 200 experienced nurses did in her exact situation." tone="deep">
+    <div class="max-w-(--container-prose) space-y-8" data-reveal>
+      <p class="text-lead">Our goal: 50,000 Wisdom Nodes across healthcare. Tero is designed to surface the right wisdom at the right moment. The database compounds every year.</p>
+      <div class="space-y-1 font-display text-lead font-bold text-white">
+        <p>Libraries preserved books. Museums preserved objects.</p>
+        <p>EdTerm preserves what people actually learned from living.</p>
+        <p class="pt-6">Wisdom doesn't have to die with the people who earned it.</p>
+      </div>
+      <div class="pt-4">
+        <p class="label text-gold-300">Start the conversation</p>
+        <Button href="mailto:partners@edterm.com" size="lg" class="mt-4">partners@edterm.com</Button>
+      </div>
+    </div>
+  </DeckSlide>
+</BaseLayout>
+
+<script>
+  // Sticky deck bar: show the slide currently in view and advance the progress line.
+  const slides = Array.from(document.querySelectorAll<HTMLElement>('[data-slide]'));
+  const num = document.querySelector('[data-deck-num]');
+  const title = document.querySelector('[data-deck-title]');
+  const bar = document.querySelector<HTMLElement>('[data-deck-progress]');
+  const total = slides.length;
+  const pad = (n: number) => String(n).padStart(2, '0');
+  if (num && title && bar && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          const el = e.target as HTMLElement;
+          const n = Number(el.dataset.slide);
+          num.textContent = `${pad(n)} / ${pad(total)}`;
+          title.textContent = el.dataset.title ?? '';
+          bar.style.width = `${(n / total) * 100}%`;
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    );
+    slides.forEach((s) => io.observe(s));
+  }
+</script>
