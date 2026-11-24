@@ -30,7 +30,6 @@ const funds = [
 
 const milestones = [
   '1,000 Wisdom Nodes collected across healthcare pilot',
-  'ACE2026 Tokyo oral presentation — November 2026',
   '4 university partnerships active and collecting',
   'First enterprise B2B engagement closed',
   'Tero v1 beta live — AI retrieval layer operational',
@@ -76,7 +75,7 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
     <div class="container-site grid-12 gap-y-14 pb-20 pt-16 sm:pb-28 sm:pt-24 lg:pb-32 lg:pt-28">
       <div class="col-span-12 lg:col-span-7" data-reveal>
         <p class="label text-gold-300">Investor Brief · 2026</p>
-        <h1 id="slide-1-heading" class="mt-6 text-display font-extrabold">The wisdom that walks out the door every day.</h1>
+        <h1 id="slide-1-heading" class="mt-6 text-display font-extrabold"><span class="block">The data is there.</span> <span class="block">The judgment behind it isn’t.</span></h1>
         <p class="mt-8 max-w-(--container-lead) text-lead text-white/85">
           EdTerm captures how experienced professionals actually decide under pressure — before they retire and that
           knowledge disappears permanently.
@@ -178,12 +177,12 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">Peer Review</p>
         <h3 class="mt-3 text-h3 font-bold">Double-Blind Peer Review Passed</h3>
-        <p class="mt-3 text-ink-muted">Wisdom Journalism framework accepted by the International Academic Forum. Confirmed oral presenter at ACE2026 — Asian Conference on Education, Tokyo, November 2026.</p>
+        <p class="mt-3 text-ink-muted">Wisdom Journalism framework accepted by the International Academic Forum. Presented at the 18th Annual Asian Conference on Education (ACE2026), Tokyo, 2026.</p>
       </article>
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">IRB &amp; Research</p>
         <h3 class="mt-3 text-h3 font-bold">IRB Approved — Lindenwood University</h3>
-        <p class="mt-3 text-ink-muted">CITI human subjects training completed. MOU in process.</p>
+        <p class="mt-3 text-ink-muted">An IRB-approved study through Lindenwood University, now open for participants, in collaboration with Dr. James Hutson. CITI human subjects training completed. MOU in process.</p>
       </article>
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">First Artifact</p>
@@ -192,12 +191,16 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
       </article>
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">Momentum</p>
-        <h3 class="mt-3 text-h3 font-bold">YC Application Submitted</h3>
-        <ul class="mt-3 space-y-2 text-ink-muted">
-          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>YC application submitted — August 2026 batch</span></li>
-          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Global fieldwork completed — Thailand, Qatar Q1 2026</span></li>
+        <ul class="mt-4 space-y-2 text-ink-muted">
+          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Global fieldwork completed across North America and Asia.</span></li>
           <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Active outreach to healthcare systems and university partners</span></li>
         </ul>
+      </article>
+      <!-- Full-width fifth card so the 2-column grid stays even -->
+      <article class:list={[cardLight, 'md:col-span-2']} data-reveal>
+        <p class="label text-purple-700">Conference</p>
+        <h3 class="mt-3 text-h3 font-bold">18th Annual Asian Conference on Education (ACE2026), Tokyo, 2026</h3>
+        <p class="mt-3 text-ink-muted">Presented the Wisdom Journalism methodology as curriculum design.</p>
       </article>
     </div>
   </DeckSlide>
@@ -271,15 +274,15 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
         <p class="mt-4">Spent career studying how knowledge moves between people across industries and cultures. Built EdTerm from zero in 10 months to peer-reviewed framework, international conference, and active university research partnership.</p>
         <ul class="mt-5 space-y-2">
           <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Wisdom Journalism peer review passed — IAFOR</span></li>
-          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>ACE2026 Tokyo — confirmed oral presenter</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Presented at ACE2026, Tokyo.</span></li>
           <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>20 years inside ancient and modern knowledge transfer systems</span></li>
-          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Global fieldwork: Mariana Islands, Alaska, Nepal, Thailand, Qatar</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Global fieldwork completed across North America and Asia.</span></li>
         </ul>
       </article>
       <article class={cardDark} data-reveal>
         <h3 class="text-h3 font-bold text-white">Lindenwood University</h3>
         <p class="label mt-2 text-gold-300">Academic Partner</p>
-        <p class="mt-4">An IRB-approved study through Lindenwood University.</p>
+        <p class="mt-4">An IRB-approved study through Lindenwood University, now open for participants, in collaboration with Dr. James Hutson.</p>
         <ul class="mt-5 space-y-2">
           <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Lindenwood University institutional backing</span></li>
         </ul>
