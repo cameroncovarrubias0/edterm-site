@@ -62,14 +62,20 @@ const isCurrent = (href: string) => path === href;
       </button>
     </div>
   </div>
+</header>
 
-  <!-- Mobile menu: full-screen list under the header; every page is one tap away. -->
-  <nav
-    id="mobile-menu"
-    aria-label="Main"
-    class="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-white lg:hidden"
-    hidden
-  >
+<!--
+  Mobile menu: full-screen list under the header; every page is one tap away.
+  It sits outside <header> on purpose: the header's backdrop-blur makes it the containing block for
+  fixed descendants, which collapsed this menu to the header's height (0px tall). Its top edge is set
+  to the header's bottom when it opens (the utility bar above the header moves that edge).
+-->
+<nav
+  id="mobile-menu"
+  aria-label="Main"
+  class="fixed inset-x-0 bottom-0 top-[4.5rem] z-40 overflow-y-auto overscroll-contain bg-white lg:hidden"
+  hidden
+>
     <ul class="container-site flex flex-col py-6">
       {
         NAV.map((item) => (
@@ -91,18 +97,27 @@ const isCurrent = (href: string) => path === href;
         <a href={`mailto:${CONTACT_EMAIL}`} class="inline-flex min-h-11 items-center hover:text-purple-700">{CONTACT_EMAIL}</a>
       </li>
     </ul>
-  </nav>
-</header>
+</nav>
 
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const menu = document.getElementById('mobile-menu');
-  if (toggle && menu) {
+  const header = toggle?.closest('header');
+  if (toggle && menu && header) {
     const label = toggle.querySelector('[data-menu-label]');
     const iconOpen = toggle.querySelector('[data-menu-icon="open"]');
     const iconClose = toggle.querySelector('[data-menu-icon="close"]');
 
+    // Start the menu exactly under the header, wherever its bottom edge currently is.
+    const placeMenu = () => {
+      menu.style.top = `${Math.max(0, header.getBoundingClientRect().bottom)}px`;
+    };
+    window.addEventListener('resize', () => {
+      if (!menu.hidden) placeMenu();
+    });
+
     const setOpen = (open: boolean) => {
+      if (open) placeMenu();
       menu.hidden = !open;
       toggle.setAttribute('aria-expanded', String(open));
       if (label) label.textContent = open ? 'Close menu' : 'Open menu';
