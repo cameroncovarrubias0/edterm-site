@@ -16,9 +16,11 @@ interface Props {
   ogImage?: string;
   /** Force noindex on a single page regardless of NOINDEX. */
   noindex?: boolean;
+  /** Omit the site header and footer (the /pitch deck supplies its own bar). */
+  bare?: boolean;
 }
 
-const { title, description, ogImage = '/og-image.png', noindex = false } = Astro.props;
+const { title, description, ogImage = '/og-image.png', noindex = false, bare = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site);
 const ogUrl = new URL(ogImage, Astro.site);
 const robots = NOINDEX || noindex;
@@ -57,11 +59,12 @@ const robots = NOINDEX || noindex;
     >
       Skip to content
     </a>
-    <Header />
+    {!bare && <Header />}
+    <slot name="bar" />
     <main id="main" class="flex-1">
       <slot />
     </main>
-    <Footer />
+    {!bare && <Footer />}
 
     <script>
       // Soft reveal for [data-reveal] blocks and [data-build] sequences (stack diagram, loop line).
