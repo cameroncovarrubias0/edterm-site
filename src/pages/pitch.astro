@@ -1,8 +1,10 @@
 ---
-// /pitch: the investor brief, rebuilt in the site's design system.
-// Slide text is carried over from the previous public/pitch.html (same 9 slides, numbers and sources),
-// with owner-approved edits: peer-reviewed (not "validated"), no node field structure, no individual names,
-// softened superlatives, healthcare-only vision. Do not edit claims here without the owner.
+// /pitch: the investor brief, in the site's design system.
+// Source: the owner's finished deck (EdTerm-Site/pitch-final.html), same 9 slides, numbers and sources,
+// with owner-approved edits: new cover headline; fieldwork by region, not country; no application lines;
+// ACE2026 in past tense; Lindenwood study wording; peer-reviewed (never "validated"); softened superlatives;
+// no node field structure; node counts as goals only (Node #004831 is the only captured node);
+// Tero described as designed, not live. Do not edit claims here without the owner.
 //
 // Rules (see CLAUDE.md): never linked from any page, nav, footer, sitemap or button; always noindex
 // (meta tag via `noindex` below + X-Robots-Tag header in vercel.json); excluded from the sitemap.
@@ -29,7 +31,7 @@ const funds = [
 ];
 
 const milestones = [
-  '1,000 Wisdom Nodes collected across healthcare pilot',
+  'Goal: 1,000 Wisdom Nodes across the healthcare pilot',
   '4 university partnerships active and collecting',
   'First enterprise B2B engagement closed',
   'Tero v1 beta live — AI retrieval layer operational',
@@ -41,6 +43,7 @@ const card = 'rounded-card border p-6 sm:p-8';
 const cardLight = `${card} border-line bg-white`;
 const cardDark = `${card} border-white/12 bg-white/[0.04]`;
 const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
+const statNum = 'font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none';
 ---
 
 <BaseLayout
@@ -77,8 +80,8 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
         <p class="label text-gold-300">Investor Brief · 2026</p>
         <h1 id="slide-1-heading" class="mt-6 text-display font-extrabold"><span class="block">The data is there.</span> <span class="block">The judgment behind it isn’t.</span></h1>
         <p class="mt-8 max-w-(--container-lead) text-lead text-white/85">
-          EdTerm captures how experienced professionals actually decide under pressure — before they retire and that
-          knowledge disappears permanently.
+          EdTerm is a healthcare data infrastructure company building the reasoning layer — the structured expert
+          judgment that EHRs and genomic databases cannot capture, collected from experienced clinicians before they retire.
         </p>
         <p class="mt-8 text-small text-white/70">Cameron Covarrubias · Founder &nbsp;·&nbsp; partners@edterm.com</p>
       </div>
@@ -89,10 +92,11 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
           </blockquote>
           <figcaption class="label mt-4 text-white/60">— The EdTerm Thesis</figcaption>
         </figure>
-        <div class="rounded-card border border-white/15 bg-white/[0.05] p-6">
+        <!-- @container: the amount scales to the box's own width, so it always fits inside it. -->
+        <div class="@container rounded-card border border-white/15 bg-white/[0.05] p-6">
           <p class="label text-gold-300">Raising</p>
-          <p class="mt-2 font-display text-h1 font-extrabold text-white">$1,000,000</p>
-          <p class="mt-2 text-small text-white/75">SAFE · $10M Pre-Money Cap · Minimum Check $25K</p>
+          <p class="mt-2 whitespace-nowrap font-display text-[length:min(3.75rem,15cqw)] font-extrabold leading-tight text-white">$1,000,000</p>
+          <p class="mt-2 text-small text-white/75">SAFE · $10M Valuation Cap · Minimum Check $25K</p>
         </div>
       </div>
     </div>
@@ -105,41 +109,40 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
         <div>
           <dt class="sr-only">$5.19M</dt>
           <dd>
-            <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-purple-700" aria-hidden="true">$5.19M</p>
-            <p class="mt-3 text-ink-muted">Lost annually per hospital system to RN turnover alone</p>
+            <p class:list={[statNum, 'text-purple-700']} aria-hidden="true">$5.19M</p>
+            <p class="mt-3 text-ink-muted">Lost annually per hospital system to RN turnover alone (NSI, 2026 report)</p>
           </dd>
         </div>
         <div>
           <dt class="sr-only">40%</dt>
           <dd>
-            <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-purple-700" aria-hidden="true">40%</p>
+            <p class:list={[statNum, 'text-purple-700']} aria-hidden="true">40%</p>
             <p class="mt-3 text-ink-muted">Of nurses plan to retire or leave within five years</p>
           </dd>
         </div>
         <div>
           <dt class="sr-only">1M+</dt>
           <dd>
-            <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-purple-700" aria-hidden="true">1M+</p>
+            <p class:list={[statNum, 'text-purple-700']} aria-hidden="true">1M+</p>
             <p class="mt-3 text-ink-muted">RNs projected to exit the workforce by end of the decade</p>
           </dd>
         </div>
       </dl>
       <div class="col-span-12 max-w-(--container-prose) space-y-4 lg:col-span-6 lg:col-start-7" data-reveal>
-        <p>Every knowledge management system captures what was written down. Nothing captures how experienced people actually made decisions under pressure.</p>
-        <p>Training programs transfer information. Nothing transfers wisdom. When a 32-year ED nurse retires, the judgment she built across thousands of edge cases — the patterns she learned to read before the vitals confirmed them — leaves with her. Permanently.</p>
-        <p>This is not a documentation problem. It is a methodology problem. No existing tool was designed to capture what experienced clinicians actually know.</p>
-        <p class="!mt-8 border-l-2 border-gold-500 pl-5 font-display text-lead font-bold text-navy">Existing tools weren't built for this. The category is still forming.</p>
+        <p>When an experienced practitioner retires or leaves, the judgment they built over a career — the thing that actually makes them good at the job — walks out the door with them. It was never written down because it isn’t the kind of knowledge that writes down easily: it’s pattern recognition and situational judgment, the stuff you only get from doing the job for 20+ years.</p>
+        <p>The cost shows up as turnover and re-learning, not as a line item for “lost knowledge.” Beyond healthcare, Panopto (2018) estimated that large US businesses lose $47M a year to inefficient knowledge sharing. Universities, meanwhile, train the next generation on textbooks and documentation — never on what practitioners actually learned on the job. The loop is broken.</p>
+        <p class="!mt-8 border-l-2 border-gold-500 pl-5 font-display text-lead font-bold text-navy">Healthcare data records what happened. Nothing records how an experienced clinician read it.</p>
       </div>
     </div>
   </DeckSlide>
 
   <!-- SLIDE 3: SOLUTION -->
-  <DeckSlide n={3} total={TOTAL} eyebrow="The Solution" heading="Structured interviews. Permanent, searchable wisdom." tone="deep">
+  <DeckSlide n={3} total={TOTAL} eyebrow="The Solution" heading="The reasoning layer. Captured, structured, searchable." tone="deep">
     <div class="grid-12 gap-y-12">
       <div class="col-span-12 lg:col-span-6" data-reveal>
         <div class="max-w-(--container-prose) space-y-4">
-          <p>EdTerm conducts structured interviews with retiring professionals using Wisdom Journalism — a peer-reviewed methodology — and transforms their judgment into Wisdom Nodes: structured knowledge artifacts.</p>
-          <p>Tero is designed to surface the right node to the right person at the right moment. A second-year ICU nurse would describe what she is seeing, and Tero would match her to the nodes of nurses who navigated the same threshold.</p>
+          <p>EHRs record what was presented and treated. Genomic databases record what is possible. Neither captures how an experienced clinician interpreted the signals. The Human Wisdom Database (HWD) captures that reasoning through Wisdom Journalism, a peer-reviewed methodology, and is designed to make it retrievable through an AI layer called Tero.</p>
+          <p>A Wisdom Node is a structured record of a specific moment of professional judgment. The first node is captured: Node #004831, a Senior ED nurse with 32 years of experience. Every node is designed to be sourced to a real practitioner’s actual judgment, captured before it’s lost — not scraped from documentation that was already written down.</p>
         </div>
         <!-- Connected sequence, same pattern as the site's capture steps -->
         <ol class="mt-10">
@@ -172,28 +175,29 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
   </DeckSlide>
 
   <!-- SLIDE 4: TRACTION -->
-  <DeckSlide n={4} total={TOTAL} eyebrow="Traction" heading="10 months. Pre-revenue. Real proof." tone="paper">
+  <DeckSlide n={4} total={TOTAL} eyebrow="Traction" heading="Pre-revenue. Real proof." tone="paper">
     <div class="grid gap-4 md:grid-cols-2">
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">Peer Review</p>
         <h3 class="mt-3 text-h3 font-bold">Double-Blind Peer Review Passed</h3>
-        <p class="mt-3 text-ink-muted">Wisdom Journalism framework accepted by the International Academic Forum. Presented at the 18th Annual Asian Conference on Education (ACE2026), Tokyo, 2026.</p>
+        <p class="mt-3 text-ink-muted">Wisdom Journalism methodology passed double-blind peer review through the International Academic Forum. Presented at the 18th Annual Asian Conference on Education (ACE2026), Tokyo, 2026.</p>
       </article>
       <article class={cardLight} data-reveal>
-        <p class="label text-purple-700">IRB &amp; Research</p>
+        <p class="label text-purple-700">Research Study</p>
         <h3 class="mt-3 text-h3 font-bold">IRB Approved — Lindenwood University</h3>
-        <p class="mt-3 text-ink-muted">An IRB-approved study through Lindenwood University, now open for participants, in collaboration with Dr. James Hutson. CITI human subjects training completed. MOU in process.</p>
+        <p class="mt-3 text-ink-muted">An IRB-approved study through Lindenwood University, now open for participants, in collaboration with Dr. James Hutson. CITI human subjects training completed.</p>
       </article>
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">First Artifact</p>
-        <h3 class="mt-3 text-h3 font-bold">Node #004831 Produced</h3>
-        <p class="mt-3 text-ink-muted">Senior ED Nurse, 32 years. Reviewed by senior nursing educators. The methodology works in practice, not just theory.</p>
+        <h3 class="mt-3 text-h3 font-bold">First Wisdom Node Captured</h3>
+        <p class="mt-3 text-ink-muted">Node #004831 — Senior ED Nurse, 32 years. Reviewed by senior nursing educators.</p>
       </article>
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">Momentum</p>
-        <ul class="mt-4 space-y-2 text-ink-muted">
-          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Global fieldwork completed across North America and Asia.</span></li>
-          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Active outreach to healthcare systems and university partners</span></li>
+        <h3 class="mt-3 text-h3 font-bold">Early Funding and Customer Validation</h3>
+        <ul class="mt-3 space-y-2 text-ink-muted">
+          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>Hospital discovery conversations underway as business customer validation (prospect-stage, not yet contracted)</span></li>
+          <li class="flex gap-3"><span class:list={[dot, 'bg-purple-700']} aria-hidden="true"></span><span>$50,000 committed by EdTerm’s first investor, on a SAFE at a $10M valuation cap</span></li>
         </ul>
       </article>
       <!-- Full-width fifth card so the 2-column grid stays even -->
@@ -206,31 +210,31 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
   </DeckSlide>
 
   <!-- SLIDE 5: MARKET -->
-  <DeckSlide n={5} total={TOTAL} eyebrow="The Market" heading="A category still taking shape." tone="deep">
+  <DeckSlide n={5} total={TOTAL} eyebrow="The Market" heading="The layer between the data and the decision." tone="deep">
     <div class="grid-12 gap-y-12">
       <div class="col-span-12 space-y-10 lg:col-span-6" data-reveal>
         <div>
-          <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-gold-300">$62.2B</p>
+          <p class:list={[statNum, 'text-gold-300']}>$62.2B</p>
           <p class="mt-3 max-w-(--container-prose)">Total Addressable Market — Global knowledge management software market by 2033, growing at 13.6% CAGR. Source: <a href="https://www.grandviewresearch.com/industry-analysis/knowledge-management-software-market-report" target="_blank" rel="noopener" class="text-gold-300 underline underline-offset-4 hover:text-white">Grand View Research</a></p>
         </div>
         <div>
-          <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-gold-300">$9.9B</p>
+          <p class:list={[statNum, 'text-gold-300']}>$9.9B</p>
           <p class="mt-3 max-w-(--container-prose)">Serviceable Addressable Market — Healthcare knowledge management market by 2030, growing at 14.4% CAGR. Source: <a href="https://www.meticulousresearch.com/product/healthcare-knowledge-management-market-6700/toc" target="_blank" rel="noopener" class="text-gold-300 underline underline-offset-4 hover:text-white">Meticulous Research</a></p>
         </div>
         <div>
-          <p class="font-display text-[length:clamp(2.75rem,2rem+3vw,4rem)] font-extrabold leading-none text-gold-300">$37.5M</p>
+          <p class:list={[statNum, 'text-gold-300']}>$37.5M</p>
           <p class="mt-3 max-w-(--container-prose)">Serviceable Obtainable Market — ARR at Year 5: 100 hospital systems × 5 departments × $75K average contract</p>
         </div>
-        <p class="max-w-(--container-prose) text-small text-white/60">Few tools focus on retirement knowledge retention. The category is still forming.</p>
+        <p class="max-w-(--container-prose) text-small text-white/60">Healthcare is the wedge: nurses, pharmacists, and clinical operations staff. The long-term opportunity is the reasoning layer for clinical AI, decision support, and training systems built on EHR and genomic data — expert reasoning mapped to real clinical contexts.</p>
       </div>
       <div class="col-span-12 lg:col-span-5 lg:col-start-8" data-reveal>
         <div class={cardDark}>
           <h3 class="text-h3 font-bold text-white">Why Now</h3>
           <ul class="mt-6 space-y-4">
             <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>The nursing retirement wave is happening right now — not in five years. All Baby Boomers reach retirement age before 2030.</p></li>
-            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>LLMs can now structure messy human knowledge at scale — this was technically impossible three years ago.</p></li>
-            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>A peer-reviewed methodology gives enterprise buyers a credible basis for adoption. We have it in place.</p></li>
-            <li class="flex gap-3 border-t border-white/12 pt-4"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><p class="text-white/85"><strong class="text-white">The moat:</strong> The data does not exist yet. You cannot train an AI on wisdom that was never collected. 50,000 nodes is worth exponentially more than 500 — patterns emerge at scale that no individual expert could articulate.</p></li>
+            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>LLMs can now structure messy human knowledge at scale.</p></li>
+            <li class="flex gap-3"><span class:list={[dot, 'bg-white/40']} aria-hidden="true"></span><p>The methodology has passed double-blind peer review, which supports credibility with health systems.</p></li>
+            <li class="flex gap-3 border-t border-white/12 pt-4"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><p class="text-white/85"><strong class="text-white">The moat:</strong> The data does not exist yet. You cannot train a system on reasoning that was never collected. A larger archive reveals patterns no single expert could articulate.</p></li>
           </ul>
         </div>
       </div>
@@ -254,9 +258,9 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
       </article>
       <article class={cardLight} data-reveal>
         <p class="label text-purple-700">Phase 3 · Year 3+</p>
-        <h3 class="mt-3 text-h3 font-bold">HWD &amp; Tero SaaS</h3>
+        <h3 class="mt-3 text-h3 font-bold">The Reasoning Layer</h3>
         <p class="mt-3 font-display font-bold text-purple-700">Annual license · Dataset licensing to AI companies</p>
-        <p class="mt-3 text-ink-muted">Access the node archive as it grows. Dataset licensing for AI training data. This is where the real scale lives. The database compounds every year.</p>
+        <p class="mt-3 text-ink-muted">License access to the node archive as it grows, including for clinical AI, decision-support, and training systems. EHRs record what happened and genomic databases record what is possible; the reasoning layer adds how experienced clinicians interpret it. The database compounds every year.</p>
       </article>
     </div>
     <div class="mt-6 rounded-card bg-paper p-6 sm:p-8" data-reveal>
@@ -271,20 +275,10 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
       <article class={cardDark} data-reveal>
         <h3 class="text-h3 font-bold text-white">Cameron Covarrubias</h3>
         <p class="label mt-2 text-gold-300">Founder &amp; CEO</p>
-        <p class="mt-4">Spent career studying how knowledge moves between people across industries and cultures. Built EdTerm from zero in 10 months to peer-reviewed framework, international conference, and active university research partnership.</p>
+        <p class="mt-4">Two decades of global fieldwork studying how wisdom transfers through apprenticeship systems and institutions — across North America and Asia. That fieldwork is the origin of the Wisdom Journalism methodology. Solo founder, full-time on EdTerm.</p>
         <ul class="mt-5 space-y-2">
           <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Wisdom Journalism peer review passed — IAFOR</span></li>
           <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Presented at ACE2026, Tokyo.</span></li>
-          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>20 years inside ancient and modern knowledge transfer systems</span></li>
-          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Global fieldwork completed across North America and Asia.</span></li>
-        </ul>
-      </article>
-      <article class={cardDark} data-reveal>
-        <h3 class="text-h3 font-bold text-white">Lindenwood University</h3>
-        <p class="label mt-2 text-gold-300">Academic Partner</p>
-        <p class="mt-4">An IRB-approved study through Lindenwood University, now open for participants, in collaboration with Dr. James Hutson.</p>
-        <ul class="mt-5 space-y-2">
-          <li class="flex gap-3"><span class:list={[dot, 'bg-gold-300']} aria-hidden="true"></span><span>Lindenwood University institutional backing</span></li>
         </ul>
       </article>
     </div>
@@ -293,25 +287,17 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
       <div class="mt-6 grid gap-4 md:grid-cols-3">
         <div class="rounded-card border border-white/12 p-5">
           <p class="font-display font-bold text-white">Technical Co-Founder</p>
-          <p class="mt-2 text-small text-white/70">Primary hire this raise funds · Knowledge graph or NLP background · Search active</p>
-        </div>
-        <div class="rounded-card border border-white/12 p-5">
-          <p class="font-display font-bold text-white">Healthcare System Partner</p>
-          <p class="mt-2 text-small text-white/70">Founding health-system partner · CNO or VP Workforce Development · Active outreach underway</p>
-        </div>
-        <div class="rounded-card border border-white/12 p-5">
-          <p class="font-display font-bold text-white">University Partners</p>
-          <p class="mt-2 text-small text-white/70">3 additional journalism or communications programs · Global network in development</p>
+          <p class="mt-2 text-small text-white/70">Primary hire this raise funds · Knowledge graph or NLP background</p>
         </div>
       </div>
     </div>
   </DeckSlide>
 
   <!-- SLIDE 8: THE ASK -->
-  <DeckSlide n={8} total={TOTAL} eyebrow="The Ask" heading="$1M to build the Human Wisdom Database." tone="paper">
+  <DeckSlide n={8} total={TOTAL} eyebrow="The Ask" heading="$1M to build the reasoning layer." tone="paper">
     <div class="grid-12 gap-y-12">
       <div class="col-span-12 lg:col-span-6" data-reveal>
-        <p class="text-lead">Raising $1,000,000 on a SAFE. Pre-money cap $10M. Minimum check $25,000.</p>
+        <p class="text-lead">Raising $1,000,000 on a SAFE at a $10M valuation cap. Minimum check $25,000.</p>
         <h3 class="label mt-10 text-ink-muted">Use of Funds</h3>
         <ul class="mt-5 space-y-4">
           {
@@ -349,7 +335,7 @@ const dot = 'mt-[0.6em] size-1.5 shrink-0 rounded-full';
   <!-- SLIDE 9: VISION -->
   <DeckSlide n={9} total={TOTAL} eyebrow="The Vision" heading="In three years, a second-year nurse knows what 200 experienced nurses did in her exact situation." tone="deep">
     <div class="max-w-(--container-prose) space-y-8" data-reveal>
-      <p class="text-lead">Our goal: 50,000 Wisdom Nodes across healthcare. Tero is designed to surface the right wisdom at the right moment. The database compounds every year.</p>
+      <p class="text-lead">Our goal: 50,000 Wisdom Nodes across healthcare. Tero is designed to surface the right wisdom at the right moment, and the reasoning layer becomes context that clinical AI, decision support, and training systems can reference.</p>
       <div class="space-y-1 font-display text-lead font-bold text-white">
         <p>Libraries preserved books. Museums preserved objects.</p>
         <p>EdTerm preserves what people actually learned from living.</p>
